@@ -24,7 +24,7 @@
 }
 
 .trailer {
-	background: var(--secondary-background);
+	background: var(--bg-2);
 }
 
 .text-trailer {

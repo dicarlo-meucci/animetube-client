@@ -8,7 +8,7 @@
 
 <style scoped>
 .profile-tooltip-wrapper {
-	background: var(--background);
+	background: var(--bg);
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;

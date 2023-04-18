@@ -1,5 +1,5 @@
 <script setup>
-import Search from './SearchBar.vue'
+import Search from './search/SearchBar.vue'
 import ProfileTooltip from './ProfileTooltip.vue'
 </script>
 
@@ -19,7 +19,7 @@ import ProfileTooltip from './ProfileTooltip.vue'
 <style scoped>
 header {
 	padding: 5px;
-	background: var(--secondary-background);
+	background: var(--bg-2);
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -35,7 +35,7 @@ header h1 {
 }
 
 .secondary {
-	color: var(--secondary-text);
+	color: var(--text-2);
 }
 
 .controls {
