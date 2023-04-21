@@ -4,7 +4,7 @@ import AnimePanel from '../components/anime/AnimePanel.vue'
 
 <template>
 	<div class="anime-page-wrapper">
-        <AnimePanel></AnimePanel>
+		<AnimePanel></AnimePanel>
 	</div>
 </template>
 
@@ -14,7 +14,7 @@ import AnimePanel from '../components/anime/AnimePanel.vue'
 	height: 85vh;
 	display: flex;
 	flex-direction: row;
-    justify-content: space-between;
+	justify-content: space-between;
 	margin: 25px;
 	border-radius: 25px;
 }

@@ -1,10 +1,20 @@
 <script setup>
+import LoginPanel from '../components/auth/Login.vue'
 import { useStore } from '../store'
 const store = useStore()
 </script>
 
 <template>
-	<h1>login here</h1>
+	<div class="login-panel-wrapper">
+		<LoginPanel />
+	</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.login-panel-wrapper {
+	height: calc(90vh - 60px);
+	display: flex;
+	align-items: middle;
+	justify-content: center;
+}
+</style>
