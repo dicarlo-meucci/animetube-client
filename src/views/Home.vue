@@ -7,7 +7,6 @@
 
 		<div class="trailer">
 			<p class="text-trailer">Trailer</p>
-			<!-- DA FIXARE L'ANIMAZIONE <p style="transform: translate3d(-1710px, 0px, 0px); transition: all 0.25s ease 0s; width: 4104px;">  </p> -->
 		</div>
 	</div>
 </template>

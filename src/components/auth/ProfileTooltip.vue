@@ -1,8 +1,10 @@
-<script setup></script>
+<script setup>
+import router from '../../router'
+</script>
 
 <template>
 	<div class="profile-tooltip-wrapper">
-		<div class="profile-tooltip">
+		<div @click="router.push('/login')" class="profile-tooltip">
 			<v-icon class="pfp" name="fa-user" scale="1.2" />
 		</div>
 	</div>
