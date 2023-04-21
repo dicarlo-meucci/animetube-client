@@ -1,11 +1,12 @@
 <script setup>
 import Search from './search/SearchBar.vue'
-import ProfileTooltip from './ProfileTooltip.vue'
+import ProfileTooltip from '../components/auth/ProfileTooltip.vue'
+import router from '../router'
 </script>
 
 <template>
 	<header>
-		<div class="title">
+		<div class="title" @click="router.push('/')">
 			<h1 class="primary">Anime</h1>
 			<h1 class="secondary">Tube</h1>
 		</div>
@@ -28,6 +29,10 @@ header {
 
 header h1 {
 	display: inline;
+}
+
+.title {
+	cursor: pointer;
 }
 
 .primary {

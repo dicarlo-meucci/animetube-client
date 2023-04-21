@@ -2,12 +2,14 @@
 
 <template>
 	<div class="profile-tooltip-wrapper">
-		<v-icon class="pfp" name="fa-user" scale="1.2" />
+		<div class="profile-tooltip">
+			<v-icon class="pfp" name="fa-user" scale="1.2" />
+		</div>
 	</div>
 </template>
 
 <style scoped>
-.profile-tooltip-wrapper {
+.profile-tooltip {
 	background: var(--bg);
 	width: 50px;
 	height: 50px;
