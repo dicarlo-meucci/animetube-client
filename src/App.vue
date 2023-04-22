@@ -8,32 +8,32 @@ const store = useStore()
 
 <template>
 	<Header></Header>
-	<router-view v-slot="{ Component, route }">
-		<transition name="slide">
+	<transition name="slide">
+		<router-view v-slot="{ Component, route }">
 			<component :is="Component" />
-		</transition>
-	</router-view>
+		</router-view>
+	</transition>
 </template>
 
 <style scoped>
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.3s;
+	transition: all .3s;
 }
 
 .slide-enter-from {
-  transform: translateX(100%);
+	transform: translateY(100%);
 }
 
 .slide-enter-to {
-  transform: translateX(0);
+	transform: translateY(0);
 }
 
 .slide-leave-from {
-  transform: translateX(0);
+	transform: translateY(0);
 }
 
 .slide-leave-to {
-  transform: translateX(-100%);
+	transform: translateY(-100%);
 }
 </style>

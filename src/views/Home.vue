@@ -1,9 +1,10 @@
-<script setup></script>
+<script setup>
+import AnimeSlideshow from '../components/anime/AnimeSlideshow.vue'
+</script>
 
 <template>
 	<div class="home-wrapper">
-		<!-- carousel -->
-		<div class="carousel"></div>
+		<AnimeSlideshow></AnimeSlideshow>
 
 		<div class="trailer">
 			<p class="text-trailer">Trailer</p>

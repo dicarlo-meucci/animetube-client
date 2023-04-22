@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 defineProps({
 	term: String
 })
@@ -22,9 +21,11 @@ defineProps({
 	color: #000;
 	align-items: center;
 	overflow: hidden;
-	width: 100%;
+	width: calc(100% - 10px);
 	border-bottom: 1px solid #000;
 	color: var(--text);
+	padding: 10px 0px 10px 10px;
+
 }
 
 p {
@@ -34,6 +35,7 @@ p {
 .result-img {
 	width: 50px;
 	object-fit: scale-down;
-	margin-right: 5px;
+	margin-right: 10px;
+	border-radius: 5px;
 }
 </style>
