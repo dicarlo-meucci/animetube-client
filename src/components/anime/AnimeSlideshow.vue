@@ -1,6 +1,7 @@
 <script setup>
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
+import router from '../../router'
 
 const slides = [
   {
@@ -33,8 +34,8 @@ const slides = [
 
 <template>
 	<div class="slideshow-wrapper">
-		<vueper-slides>
-			<vueper-slide v-for="(slide, i) in slides" :key="i" :image="slide.image" :title="slide.title" :content="slide.content">
+		<vueper-slides >
+			<vueper-slide @click="router.push('/anime')" v-for="(slide, i) in slides" :key="i" :image="slide.image" :title="slide.title" :content="slide.content">
 			</vueper-slide>
 		</vueper-slides>
 	</div>

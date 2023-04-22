@@ -14,4 +14,9 @@ export default class API {
 		// returns an array with the results such as
 		// ["naruto","your name"...]
 	}
+
+	rateAnime(id, stars, comment)
+	{
+		
+	}
 }

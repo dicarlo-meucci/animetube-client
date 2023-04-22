@@ -15,7 +15,7 @@ const store = useStore()
 			<label for="password">Password</label>
 			<input name="password" type="password" placeholder="******" />
 			<button class="register-button" type="button">Registrati</button>
-			<p @click="router.push('/login')">Entra</p>
+			<p @click="router.push('/login')">Login</p>
 		</form>
 	</div>
 </template>

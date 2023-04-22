@@ -20,6 +20,10 @@ const routes = [
 		path: '/anime',
 		name: 'Anime',
 		component: () => import('../views/AnimePage.vue')
+	},
+	{ 
+		path: "/:pathMatch(.*)*",
+		component: () => import('../views/NotFound.vue')
 	}
 ]
 
