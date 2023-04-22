@@ -75,6 +75,10 @@ p {
 	cursor: pointer;
 }
 
+h1 {
+	text-align: center;
+}
+
 @media screen and (max-width: 1300px) {
 	.login-form {
 		width: 35%;
