@@ -15,13 +15,13 @@ const store = useStore()
 <style scoped>
 .notfound-wrapper {
 	height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .notfound-content {
 	text-align: center;
-    width: max-content;
-    margin: auto;
+	width: max-content;
+	margin: auto;
 }
 </style>

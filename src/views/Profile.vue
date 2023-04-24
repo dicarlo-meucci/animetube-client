@@ -4,11 +4,7 @@ const store = useStore()
 </script>
 
 <template>
-	<div class="profile-wrapper">
-
-	</div>
+	<div class="profile-wrapper"></div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

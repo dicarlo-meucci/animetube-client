@@ -21,8 +21,8 @@ const routes = [
 		name: 'Anime',
 		component: () => import('../views/AnimePage.vue')
 	},
-	{ 
-		path: "/:pathMatch(.*)*",
+	{
+		path: '/:pathMatch(.*)*',
 		component: () => import('../views/NotFound.vue')
 	}
 ]
@@ -31,6 +31,5 @@ const router = createRouter({
 	history: createWebHistory(),
 	routes
 })
-
 
 export default router

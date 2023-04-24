@@ -33,27 +33,27 @@ const slides = [
 ]
 
 const breakpoints = {
-  400: {
-    slideRatio: 1.2,
-  },
-	500: {
-		slideRatio: 1.1,
+	400: {
+		slideRatio: 1.2
 	},
-  600: {
-		slideRatio: 1,
-  },
-  700: {
-		slideRatio: 0.8,
-  },
-  900: {
-		slideRatio: 0.7,
-  },
-  1100: {
-    slideRatio: 0.5,
-  },
-  1300: {
-    slideRatio: 0.35,
-  }
+	500: {
+		slideRatio: 1.1
+	},
+	600: {
+		slideRatio: 1
+	},
+	700: {
+		slideRatio: 0.8
+	},
+	900: {
+		slideRatio: 0.7
+	},
+	1100: {
+		slideRatio: 0.5
+	},
+	1300: {
+		slideRatio: 0.35
+	}
 }
 </script>
 
@@ -77,7 +77,7 @@ const breakpoints = {
 </template>
 
 <style scoped>
-  .slideshow-container {
-    background: var(--bg-2);
-  }
+.slideshow-container {
+	background: var(--bg-2);
+}
 </style>

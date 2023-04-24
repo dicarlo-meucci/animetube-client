@@ -15,8 +15,5 @@ export default class API {
 		// ["naruto","your name"...]
 	}
 
-	rateAnime(id, stars, comment)
-	{
-		
-	}
+	rateAnime(id, stars, comment) {}
 }

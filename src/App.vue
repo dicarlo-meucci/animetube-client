@@ -18,7 +18,7 @@ const store = useStore()
 <style scoped>
 .slide-enter-active,
 .slide-leave-active {
-	transition: all .3s;
+	transition: all 0.3s;
 }
 
 .slide-enter-from {
