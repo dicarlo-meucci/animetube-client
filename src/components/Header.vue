@@ -33,6 +33,7 @@ header h1 {
 
 .title {
 	cursor: pointer;
+	margin-right: 10px;
 }
 
 .primary {
