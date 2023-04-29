@@ -52,7 +52,16 @@ const breakpoints = {
 		slideRatio: 0.5
 	},
 	1300: {
+		slideRatio: 0.4
+	},
+	1400: {
 		slideRatio: 0.35
+	},
+	1600: {
+		slideRatio: 0.30
+	},
+	2000: {
+		slideRatio: 0.28
 	}
 }
 </script>

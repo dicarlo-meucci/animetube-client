@@ -19,6 +19,10 @@ import AnimeSlideshow from '../components/anime/AnimeSlideshow.vue'
 	flex-direction: column;
 }
 
+.balls {
+
+}
+
 .home-wrapper div {
 	height: 100%;
 }
