@@ -4,11 +4,18 @@ import API from '../services/API.js'
 export const useStore = defineStore('store', {
 	state: () => ({
 		API: new API(),
-		isLoggedIn: true
+		isLoggedIn: true,
+		anime: {}
 	}),
+	getters: {
+		currentAnime: (state) => state.anime
+	},
 	actions: {
 		logout() {
-			state.isLoggedIn = false
+			this.isLoggedIn = false
+		},
+		setAnime(anime) {
+			this.anime = anime
 		}
 	}
 })

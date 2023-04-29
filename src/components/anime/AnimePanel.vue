@@ -1,8 +1,9 @@
 <script setup>
 import AnimeScore from './AnimeScore.vue'
-defineProps({
-    anime: Object
-})
+import {useStore} from '../../store'
+import {watch} from 'vue'
+const store = useStore()
+const anime = store.currentAnime
 </script>
 
 <template>
@@ -10,7 +11,7 @@ defineProps({
 		<h1>{{ anime.name }}</h1>
 		<img class="key-visual" :src="anime.cover" />
 		<h1>Informations</h1>
-		<AnimeScore :anime="anime"></AnimeScore>
+		<AnimeScore></AnimeScore>
 	</div>
 </template>
 

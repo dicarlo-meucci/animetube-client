@@ -7,24 +7,15 @@ import router from '../router'
 import { useStore } from '../store'
 import { onMounted, ref, watch } from 'vue'
 const store = useStore()
-let animeID = router.currentRoute.value.path.split('view')[1].substring(1)
-const anime = ref()
-
-const fetchAnimeData = async () => {
-	anime.value = await store.API.getAnime(animeID)
-}
-
-onMounted(fetchAnimeData)
-watch(router.currentRoute, fetchAnimeData)
 </script>
 
 <template>
-	<div class="anime-page-wrapper" v-if="anime">
-		<AnimePanel :anime="anime"></AnimePanel>
+	<div class="anime-page-wrapper">
+		<AnimePanel></AnimePanel>
 		<div class="anime-community-info">
-			<AnimeReviews :anime="anime"></AnimeReviews>
-			<AnimeScore :anime="anime"></AnimeScore>
-			<AnimeEpisodes :anime="anime"></AnimeEpisodes>
+			<AnimeReviews></AnimeReviews>
+			<AnimeScore></AnimeScore>
+			<AnimeEpisodes></AnimeEpisodes>
 		</div>
 	</div>
 </template>

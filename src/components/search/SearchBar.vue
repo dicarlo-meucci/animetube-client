@@ -35,7 +35,7 @@ watch(searchTerm, (newValue, oldValue) => {
 	}
 })
 
-function displayAnime(id) {
+async function displayAnime(id) {
 	searchTerm.value = ''
 	router.push(`/anime/view/${id}`)
 }

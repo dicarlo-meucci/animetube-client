@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useStore } from '../store'
 
 const routes = [
 	{
@@ -32,4 +33,12 @@ const router = createRouter({
 	routes
 })
 
+router.beforeEach(async (to, from) => {
+	const store = useStore()
+	if (to.name === 'Anime')
+	{
+		const id = to.path.split('/')[3]
+		store.setAnime(await store.API.getAnime(id))
+	}
+})
 export default router
