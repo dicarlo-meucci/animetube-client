@@ -40,7 +40,7 @@ watch(searchTerm, (newValue, oldValue) => {
 		<div class="search-controls">
 			<input v-model="searchTerm" type="text" class="search-input" placeholder="Cerca qui il tuo anime" />
 			<div class="search-results">
-				<SearchResult v-for="(result, index) in searchResults" :title="result.nome" :cover="result.copertina" @click="router.push(`/anime/${result.id}`)"></SearchResult>
+				<SearchResult v-for="(result, index) in searchResults" :title="result.name" :cover="result.cover" @click="router.push(`/anime/${result.id}`)"></SearchResult>
 			</div>
 		</div>
 	</div>
