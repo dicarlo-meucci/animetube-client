@@ -7,10 +7,10 @@ defineProps({
 
 <template>
 	<div class="anime-panel-wrapper">
-		<h1>Title</h1>
-		<img class="key-visual" src="https://i.pinimg.com/550x/d1/32/91/d132910ab50a26f43fd29d5cf9bbf976.jpg" />
+		<h1>{{ anime.name }}</h1>
+		<img class="key-visual" :src="anime.cover" />
 		<h1>Informations</h1>
-		<AnimeScore></AnimeScore>
+		<AnimeScore :anime="anime"></AnimeScore>
 	</div>
 </template>
 

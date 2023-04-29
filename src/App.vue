@@ -8,7 +8,7 @@ const store = useStore()
 <template>
 	<Header></Header>
 	<transition name="slide">
-		<router-view v-slot="{ Component, route }">
+		<router-view :key="router.currentRoute.value" v-slot="{ Component, route }">
 			<component :is="Component" />
 		</router-view>
 	</transition>

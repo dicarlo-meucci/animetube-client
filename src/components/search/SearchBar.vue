@@ -12,6 +12,7 @@ let animationTimeline = null
 let firstInteraction = true
 
 watch(searchTerm, async (newValue, oldValue) => {
+	if (newValue)
 	searchResults.value = await store.API.searchAnime(newValue)
 })
 
@@ -33,6 +34,11 @@ watch(searchTerm, (newValue, oldValue) => {
 		animationTimeline.to('.search-results', { y: 0, opacity: 1, duration: 0.3, display: 'block' })
 	}
 })
+
+function displayAnime(id) {
+	searchTerm.value = ''
+	router.push(`/anime/view/${id}`)
+}
 </script>
 
 <template>
@@ -40,7 +46,7 @@ watch(searchTerm, (newValue, oldValue) => {
 		<div class="search-controls">
 			<input v-model="searchTerm" type="text" class="search-input" placeholder="Cerca qui il tuo anime" />
 			<div class="search-results">
-				<SearchResult v-for="(result, index) in searchResults" :title="result.name" :cover="result.cover" @click="router.push(`/anime/${result.id}`)"></SearchResult>
+				<SearchResult v-for="(result, index) in searchResults" :title="result.name" :cover="result.cover" @click="displayAnime(result.id)"></SearchResult>
 			</div>
 		</div>
 	</div>
