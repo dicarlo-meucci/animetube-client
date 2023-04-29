@@ -1,5 +1,8 @@
 <script setup>
 import AnimeScore from './AnimeScore.vue'
+defineProps({
+    anime: Object
+})
 </script>
 
 <template>

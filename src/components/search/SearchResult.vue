@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
-	term: String
+	title: String,
+	cover: String
 })
 </script>
 
@@ -8,9 +9,9 @@ defineProps({
 	<div class="search-result-wrapper">
 		<img
 			class="result-img"
-			src="https://external-preview.redd.it/Et7F1S67MA1k0pMKTvNLUQLvZo8Z2-3t8LHHqOTl924.jpg?auto=webp&s=ccce9fbdfd7621231650a3ce766d8356f8e9c667"
+			:src="cover"
 		/>
-		<p>{{ term }}</p>
+		<p>{{ title }}</p>
 	</div>
 </template>
 

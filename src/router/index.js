@@ -17,7 +17,7 @@ const routes = [
 		component: () => import('../views/Home.vue')
 	},
 	{
-		path: '/anime',
+		path: '/anime/:pathMatch(.*)*',
 		name: 'Anime',
 		component: () => import('../views/AnimePage.vue')
 	},

@@ -3,15 +3,27 @@ import AnimePanel from '../components/anime/AnimePanel.vue'
 import AnimeReviews from '../components/anime/AnimeReviewsPanel.vue'
 import AnimeScore from '../components/anime/AnimeScore.vue'
 import AnimeEpisodes from '../components/anime/AnimeEpisodesPanel.vue'
+import router from '../router'
+import { useStore } from '../store'
+import { onMounted, ref } from 'vue'
+const store = useStore()
+
+let animeID = router.currentRoute.value.path.split('view')[1].substring(1)
+const anime = ref()
+onMounted(async () => {
+	anime.value = await store.API.getAnime(animeID)
+	console.log(anime.value)
+})
+
 </script>
 
 <template>
 	<div class="anime-page-wrapper">
-		<AnimePanel></AnimePanel>
+		<AnimePanel :anime="anime"></AnimePanel>
 		<div class="anime-community-info">
-			<AnimeReviews></AnimeReviews>
-			<AnimeScore></AnimeScore>
-			<AnimeEpisodes></AnimeEpisodes>
+			<AnimeReviews :anime="anime"></AnimeReviews>
+			<AnimeScore :anime="anime"></AnimeScore>
+			<AnimeEpisodes :anime="anime"></AnimeEpisodes>
 		</div>
 	</div>
 </template>

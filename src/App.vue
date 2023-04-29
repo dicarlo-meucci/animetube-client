@@ -1,5 +1,4 @@
 <script setup>
-//localhost:5173
 import Header from './components/Header.vue'
 import router from './router'
 import { useStore } from './store'

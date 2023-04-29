@@ -2,10 +2,18 @@
 import SearchResult from './SearchResult.vue'
 import { ref, watch, onMounted, nextTick } from 'vue'
 import gsap from 'gsap'
+import { useStore } from '../../store'
+import router from '../../router'
+const store = useStore()
 const searchTerm = ref()
+const searchResults = ref([])
 // Define a variable to keep track of the animation timeline
 let animationTimeline = null
 let firstInteraction = true
+
+watch(searchTerm, async (newValue, oldValue) => {
+	searchResults.value = await store.API.searchAnime(newValue)
+})
 
 // Watch the searchTerm variable
 watch(searchTerm, (newValue, oldValue) => {
@@ -32,10 +40,7 @@ watch(searchTerm, (newValue, oldValue) => {
 		<div class="search-controls">
 			<input v-model="searchTerm" type="text" class="search-input" placeholder="Cerca qui il tuo anime" />
 			<div class="search-results">
-				<SearchResult :term="searchTerm"></SearchResult>
-				<SearchResult :term="searchTerm"></SearchResult>
-				<SearchResult :term="searchTerm"></SearchResult>
-				<SearchResult :term="searchTerm"></SearchResult>
+				<SearchResult v-for="(result, index) in searchResults" :title="result.nome" :cover="result.copertina" @click="router.push(`/anime/${result.id}`)"></SearchResult>
 			</div>
 		</div>
 	</div>
