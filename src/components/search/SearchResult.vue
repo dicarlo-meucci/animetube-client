@@ -7,10 +7,7 @@ defineProps({
 
 <template>
 	<div class="search-result-wrapper">
-		<img
-			class="result-img"
-			:src="cover"
-		/>
+		<img class="result-img" :src="cover" />
 		<p>{{ title }}</p>
 	</div>
 </template>

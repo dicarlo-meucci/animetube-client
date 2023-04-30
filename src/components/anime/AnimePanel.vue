@@ -1,7 +1,7 @@
 <script setup>
 import AnimeScore from './AnimeScore.vue'
-import {useStore} from '../../store'
-import {watch} from 'vue'
+import { useStore } from '../../store'
+import { watch } from 'vue'
 const store = useStore()
 const anime = store.currentAnime
 </script>

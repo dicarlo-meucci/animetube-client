@@ -13,9 +13,9 @@ const store = useStore()
 	<div class="anime-page-wrapper">
 		<AnimePanel></AnimePanel>
 		<div class="anime-community-info">
-			<AnimeReviews></AnimeReviews>
-			<AnimeScore></AnimeScore>
-			<AnimeEpisodes></AnimeEpisodes>
+			<AnimeReviews />
+			<AnimeScore />
+			<AnimeEpisodes />
 		</div>
 	</div>
 </template>

@@ -2,7 +2,19 @@
 import { useStore } from '../../store'
 import logo from '../../assets/at-logo.png'
 import router from '../../router'
+import { ref } from 'vue'
+
 const store = useStore()
+const username = ref()
+const password = ref()
+
+async function login() {
+	const result = await store.API.login(username.value, password.value)
+	if (result.ok) {
+		store.setSession(await result.json())
+		router.push('/profile')
+	} else alert((await result.json()).error)
+}
 </script>
 
 <template>
@@ -11,10 +23,10 @@ const store = useStore()
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
 			<label for="email">Email / Username</label>
-			<input name="email" type="text" placeholder="balls@gmail.com" />
+			<input v-model="username" name="email" type="text" placeholder="balls@gmail.com" />
 			<label for="password">Password</label>
-			<input name="password" type="password" placeholder="******" />
-			<button class="login-button" type="button">Entra</button>
+			<input v-model="password" name="password" type="password" placeholder="******" />
+			<button @click="login" class="login-button" type="button">Entra</button>
 			<p @click="router.push('/register')">Registrazione</p>
 		</form>
 	</div>

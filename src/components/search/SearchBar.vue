@@ -12,8 +12,7 @@ let animationTimeline = null
 let firstInteraction = true
 
 watch(searchTerm, async (newValue, oldValue) => {
-	if (newValue)
-	searchResults.value = await store.API.searchAnime(newValue)
+	if (newValue) searchResults.value = await store.API.searchAnime(newValue)
 })
 
 // Watch the searchTerm variable
@@ -46,7 +45,12 @@ async function displayAnime(id) {
 		<div class="search-controls">
 			<input v-model="searchTerm" type="text" class="search-input" placeholder="Cerca qui il tuo anime" />
 			<div class="search-results">
-				<SearchResult v-for="(result, index) in searchResults" :title="result.name" :cover="result.cover" @click="displayAnime(result.id)"></SearchResult>
+				<SearchResult
+					v-for="(result, index) in searchResults"
+					:title="result.name"
+					:cover="result.cover"
+					@click="displayAnime(result.id)"
+				></SearchResult>
 			</div>
 		</div>
 	</div>

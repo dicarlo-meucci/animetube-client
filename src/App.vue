@@ -3,13 +3,20 @@ import Header from './components/Header.vue'
 import router from './router'
 import { useStore } from './store'
 const store = useStore()
+
+function loadSession() {
+	let session = localStorage.getItem('session')
+	if (session) store.setSession(session)
+}
+
+loadSession()
 </script>
 
 <template>
 	<Header></Header>
 	<transition name="slide">
 		<router-view v-slot="{ Component, route }">
-			<component :is="Component" />
+			<component :key="router.currentRoute.value" :is="Component" />
 		</router-view>
 	</transition>
 </template>

@@ -6,20 +6,48 @@ export default class API {
 		console.log('%cAPI Initialized!', css)
 	}
 
-	login() {}
-
-	logout() {}
-
-	async searchAnime(title) {
-		return (await fetch(`${this.baseUrl}/api/anime/search`, {
+	async register(email, username, password) {
+		return await fetch(`${this.baseUrl}/api/auth/register`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({title})
-		})).json()
+			body: JSON.stringify({ email, username, password })
+		})
 	}
-	
+
+	async login(username, password) {
+		return await fetch(`${this.baseUrl}/api/auth/login`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ username, password })
+		})
+	}
+
+	async logout(token) {
+		await fetch(`${this.baseUrl}/api/auth/logout`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ token })
+		})
+	}
+
+	async searchAnime(title) {
+		return (
+			await fetch(`${this.baseUrl}/api/anime/search`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ title })
+			})
+		).json()
+	}
+
 	async getAnime(id) {
 		return (await fetch(`${this.baseUrl}/api/anime/view/${id}`)).json()
 	}

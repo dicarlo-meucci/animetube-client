@@ -2,7 +2,17 @@
 import { useStore } from '../../store'
 import logo from '../../assets/at-logo.png'
 import router from '../../router'
+import { ref } from 'vue'
 const store = useStore()
+const email = ref()
+const username = ref()
+const password = ref()
+
+async function register() {
+	const result = await store.API.register(email.value, username.value, password.value)
+	if (result.ok) store.setSession(await result.json())
+	else alert((await result.json()).error)
+}
 </script>
 
 <template>
@@ -10,11 +20,13 @@ const store = useStore()
 		<form class="register-form">
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
-			<label for="email">Email / Username</label>
-			<input name="email" type="text" placeholder="balls@gmail.com" />
+			<label for="email">Email</label>
+			<input v-model="email" name="email" type="text" placeholder="balls@gmail.com" />
+			<label for="username">Username</label>
+			<input v-model="username" name="username" type="text" placeholder="ballsniffer101" />
 			<label for="password">Password</label>
-			<input name="password" type="password" placeholder="******" />
-			<button class="register-button" type="button">Registrati</button>
+			<input v-model="password" name="password" type="password" placeholder="******" />
+			<button @click="register" class="register-button" type="button">Registrati</button>
 			<p @click="router.push('/login')">Login</p>
 		</form>
 	</div>
@@ -25,6 +37,7 @@ const store = useStore()
 	width: 100%;
 	height: max-content;
 	margin: auto;
+	margin-top: 50px;
 }
 
 .register-form {
