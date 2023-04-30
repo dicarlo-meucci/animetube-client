@@ -1,7 +1,6 @@
 <script setup>
 import AnimeScore from './AnimeScore.vue'
 import { useStore } from '../../store'
-import { watch } from 'vue'
 const store = useStore()
 const anime = store.currentAnime
 </script>
@@ -11,7 +10,7 @@ const anime = store.currentAnime
 		<h1>{{ anime.name }}</h1>
 		<img class="key-visual" :src="anime.cover" />
 		<h1>Informations</h1>
-		<AnimeScore></AnimeScore>
+		<AnimeScore/>
 	</div>
 </template>
 
@@ -25,7 +24,6 @@ const anime = store.currentAnime
 	height: 80%;
 	color: var(--text-2);
 	padding: 20px;
-	width: 20%;
 	text-align: center;
 }
 

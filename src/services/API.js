@@ -49,7 +49,19 @@ export default class API {
 	}
 
 	async getAnime(id) {
-		return (await fetch(`${this.baseUrl}/api/anime/view/${id}`)).json()
+		return await fetch(`${this.baseUrl}/api/anime/view/${id}`)
+	}
+
+	async getAnimeList() {
+		return await fetch(`${this.baseUrl}/api/anime/list`)
+	}
+
+	async getAnimeScore(id) {
+		return await fetch(`${this.baseUrl}/api/anime/score/${id}`)
+	}
+
+	async getUserProfile(username) {
+		return await fetch(`${this.baseUrl}/api/user/${username}`)
 	}
 
 	rateAnime(id, stars, comment) {}

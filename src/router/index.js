@@ -3,6 +3,11 @@ import { useStore } from '../store'
 
 const routes = [
 	{
+		path: '/',
+		name: 'Home',
+		component: () => import('../views/Home.vue')
+	},
+	{
 		path: '/login',
 		name: 'Login',
 		component: () => import('../views/Login.vue')
@@ -11,11 +16,6 @@ const routes = [
 		path: '/register',
 		name: 'Register',
 		component: () => import('../views/Register.vue')
-	},
-	{
-		path: '/',
-		name: 'Home',
-		component: () => import('../views/Home.vue')
 	},
 	{
 		path: '/profile/:pathMatch(.*)*',
@@ -42,7 +42,11 @@ router.beforeEach(async (to, from) => {
 	const store = useStore()
 	if (to.name === 'Anime') {
 		const id = to.path.split('/')[3]
-		store.setAnime(await store.API.getAnime(id))
+		store.setAnime(await (await store.API.getAnime(id)).json())
+	}
+
+	if (to.name === 'Profile') {
+		if (!store.session.token) router.push('/')
 	}
 })
 

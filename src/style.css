@@ -23,8 +23,6 @@ body {
 	overflow: hidden;
 }
 
-.title {
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-left: 5px;
+.current-counter::after {
+	content: '%'
 }

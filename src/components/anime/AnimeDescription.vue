@@ -2,18 +2,11 @@
 import { useStore } from '../../store'
 const store = useStore()
 const anime = store.currentAnime
-console.log(anime)
-
-async function animeEpisodes() {
-	for (let i = 1; i < array.length; i++) {
-		anime.episodes = array[i];
-	}
-}
 </script>
 
 <template>
     <div class="anime-panel-wrapper">
-        <button v-for="(episode, key) in anime.episodes" class="button-wrapper"> Episodio {{ key + 1 }} </button>
+        <p>{{store.currentAnime.description}}</p>
     </div>
 </template>
 
@@ -29,10 +22,6 @@ async function animeEpisodes() {
 	color: var(--text);
 	padding: 20px;
 	text-align: center;
-}
-
-.button-wrapper {
-	margin-right: 5px;
 }
 
 </style>

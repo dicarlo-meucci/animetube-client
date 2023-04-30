@@ -17,7 +17,7 @@ async function register() {
 
 <template>
 	<div class="register-wrapper">
-		<form class="register-form">
+		<form @submit.prevent="register" class="register-form">
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
 			<label for="email">Email</label>

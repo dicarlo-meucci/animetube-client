@@ -34,6 +34,8 @@ header h1 {
 .title {
 	cursor: pointer;
 	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 5px;
 }
 
 .primary {

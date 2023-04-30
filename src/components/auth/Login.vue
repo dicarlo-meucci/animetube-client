@@ -12,20 +12,20 @@ async function login() {
 	const result = await store.API.login(username.value, password.value)
 	if (result.ok) {
 		store.setSession(await result.json())
-		router.push('/profile')
+		router.push('/')
 	} else alert((await result.json()).error)
 }
 </script>
 
 <template>
 	<div class="login-wrapper">
-		<form class="login-form">
+		<form @submit.prevent="login" class="login-form">
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
 			<label for="email">Email / Username</label>
-			<input v-model="username" name="email" type="text" placeholder="balls@gmail.com" />
+			<input v-model="username" name="email" type="text" placeholder="email@gmail.com" />
 			<label for="password">Password</label>
-			<input v-model="password" name="password" type="password" placeholder="******" />
+			<input v-model="password" name="password" type="password" placeholder="password" />
 			<button @click="login" class="login-button" type="button">Entra</button>
 			<p @click="router.push('/register')">Registrazione</p>
 		</form>
