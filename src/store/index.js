@@ -16,6 +16,7 @@ export const useStore = defineStore('store', {
 			localStorage.setItem('session', this.session)
 		},
 		setAnime(anime) {
+			console.log(anime)
 			this.anime = anime
 		},
 		setSession(session) {

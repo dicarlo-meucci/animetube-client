@@ -1,13 +1,14 @@
 <script setup>
 import AnimeSlideshow from '../components/anime/AnimeSlideshow.vue'
+import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue';
 </script>
 
 <template>
 	<div class="home-wrapper">
-		<AnimeSlideshow></AnimeSlideshow>
+		<AnimeSlideshow/>
 
 		<div class="trailer">
-			<p class="text-trailer">Trailer</p>
+			<AnimeTrailerPanel/>
 		</div>
 	</div>
 </template>

@@ -9,6 +9,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@splidejs/vue-splide": "^0.6.12",
 		"gsap": "^3.11.5",
 		"oh-vue-icons": "1.0.0-rc3",
 		"pinia": "^2.0.34",

@@ -24,10 +24,9 @@ const store = useStore()
 <style scoped>
 .anime-page-wrapper {
 	background: var(--bg-2);
-	height: 85vh;
+	height: flex;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	margin: 25px;
 	border-radius: 25px;
 }

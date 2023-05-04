@@ -2,11 +2,13 @@
 import { useStore } from '../../store'
 const store = useStore()
 const anime = store.currentAnime
+console.log(anime)
 </script>
 
 <template>
     <div class="anime-panel-wrapper">
-        <p>{{store.currentAnime.description}}</p>
+		<h1 class="text-description">Trama</h1>
+        <p>{{ anime.description }}</p>
     </div>
 </template>
 
@@ -14,14 +16,15 @@ const anime = store.currentAnime
 
 .anime-panel-wrapper {
 	background: var(--bg-4);
-	display: flex;
 	flex-direction: row;
 	margin-top: 20px;
     margin-right: 20px;
 	border-radius: 20px;
 	color: var(--text);
 	padding: 20px;
-	text-align: center;
 }
 
+.text-description {
+	color: var(--text-2);
+}
 </style>

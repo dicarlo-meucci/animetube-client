@@ -13,7 +13,8 @@ async function animeEpisodes() {
 
 <template>
     <div class="anime-panel-wrapper">
-        <button v-for="(episode, key) in anime.episodes" class="button-wrapper"> Episodio {{ key + 1 }} </button>
+		<h1 class="text-episode">Episodi</h1>
+        <a v-for="(episode, key) in anime.episodes" :href="episode.link" target="_blank"><button class="button-wrapper"> {{ key + 1 }} </button></a>
     </div>
 </template>
 
@@ -21,18 +22,27 @@ async function animeEpisodes() {
 
 .anime-panel-wrapper {
 	background: var(--bg-4);
-	display: flex;
 	flex-direction: row;
 	margin-top: 20px;
     margin-right: 20px;
 	border-radius: 20px;
 	color: var(--text);
 	padding: 20px;
-	text-align: center;
 }
 
 .button-wrapper {
-	margin-right: 5px;
+	width: 50px;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 10px;
+	border: none;
+	font-weight: bold;
+	font-size: 1rem;
+	background: var(--text-2);
 }
 
+.text-episode {
+	margin-left: 5px;
+	color: var(--text-2);
+}
 </style>

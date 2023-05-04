@@ -42,10 +42,12 @@ router.beforeEach(async (to, from) => {
 	const store = useStore()
 	if (to.name === 'Anime') {
 		const id = to.path.split('/')[3]
-		store.setAnime(await (await store.API.getAnime(id)).json())
+		let result = await (await store.API.getAnime(id)).json()
+		store.setAnime(result)
 	}
 
 	if (to.name === 'Profile') {
+		return
 		if (!store.session.token) router.push('/')
 	}
 })

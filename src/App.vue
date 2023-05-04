@@ -42,4 +42,5 @@ loadSession()
 .slide-leave-to {
 	transform: translateY(-100%);
 }
+
 </style>

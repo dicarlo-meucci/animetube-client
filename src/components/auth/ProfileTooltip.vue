@@ -3,6 +3,8 @@ import router from '../../router'
 import { useStore } from '../../store'
 const store = useStore()
 function handleProfile() {
+	router.push('/profile')
+	return
 	if (store.session.token) router.push('/profile')
 	else router.push('/login')
 }
