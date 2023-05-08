@@ -26,6 +26,7 @@ onBeforeMount(async () => {
 .anime-score-wrapper {
     width: 100%;
     margin: auto;
+    display: flex;
 }
 
 .anime-rating {

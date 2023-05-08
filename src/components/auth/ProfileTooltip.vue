@@ -25,10 +25,17 @@ function handleProfile() {
 	height: 50px;
 	border-radius: 50%;
 	margin-right: 5px;
+	margin-left: 25px;
 	text-align: center;
 }
 
 .pfp {
 	margin-top: 25%;
+}
+
+@media screen and (max-width: 550px) {
+	.profile-tooltip  {
+		margin-left: 5px;
+	}
 }
 </style>

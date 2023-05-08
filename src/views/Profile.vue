@@ -1,6 +1,8 @@
 <script setup>
 import router from '../router'
 import { useStore } from '../store'
+import UserListVue from '../components/user/UserList.vue';
+
 const store = useStore()
 
 async function logout() {
@@ -15,18 +17,9 @@ async function bannerImage() {
 async function pfp() {
 	store.API.pfp()
 }
-async function bannerImage()
-computed: {
-      imageHeight () {
-        switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return '3'
-          case 'sm': return '4'
-          case 'md': return '5'
-          case 'lg': return '7'
-          case 'xl': return '7'
-        }
-      }
-    }
+
+
+
 </script>
 
 <template>
@@ -34,11 +27,15 @@ computed: {
 		<div @click="bannerImage" class="profile-banner">
 
 		</div>
-		<div @click="pfp" class="pfp">
-			<v-icon name="fa-user" :scale="imageHeight"  />
+		<div @click="pfp" class="pfp ">
+			<v-icon name="fa-user" class="resp" />
 		</div>
+		<h1>{{ store.session.username }}</h1>
 		<button @click="logout" class="logout-button" type="button">Logout</button>
-	
+
+	</div>
+	<div>
+		<UserList />
 	</div>
 </template>
 
@@ -55,6 +52,27 @@ computed: {
 	top: 33%;
 	left: 3%;
 }
+
+.resp {
+	scale: 7;
+}
+
+@media screen and (max-width: 800px) {
+	.resp {
+
+		scale: 6;
+	}
+
+}
+
+@media screen and (max-width: 600px) {
+	.resp {
+		scale: 5;
+	}
+}
+
+
+
 .logout-button {
 	width: 20%;
 	height: 50px;
@@ -69,6 +87,7 @@ computed: {
 	margin-left: 75%;
 
 }
+
 .profile-banner {
 	background: var(--bg-4);
 	display: flex;
@@ -77,5 +96,4 @@ computed: {
 	padding: 20px;
 	text-align: center;
 	height: 30vh;
-}
-</style>
+}</style>

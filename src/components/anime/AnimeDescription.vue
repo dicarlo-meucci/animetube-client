@@ -2,7 +2,6 @@
 import { useStore } from '../../store'
 const store = useStore()
 const anime = store.currentAnime
-console.log(anime)
 </script>
 
 <template>

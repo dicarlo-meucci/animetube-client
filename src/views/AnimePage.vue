@@ -14,7 +14,7 @@ const store = useStore()
 	<div class="anime-page-wrapper">
 		<AnimePanel></AnimePanel>
 		<div class="anime-community-info">
-			<AnimeDescription/>
+			<AnimeDescription />
 			<AnimeReviews />
 			<AnimeEpisodes />
 		</div>
@@ -27,12 +27,33 @@ const store = useStore()
 	height: flex;
 	display: flex;
 	flex-direction: row;
-	margin: 25px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	margin-left: 25px;
+	margin-right: 25px;
 	border-radius: 25px;
 }
 
 .anime-community-info {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+@media screen and (max-width: 690px) {
+	.anime-page-wrapper {
+		flex-direction: column;
+	}
+
+	.anime-community-info {
+		margin-left: 20px;
+	}
+
+	@media screen and (max-width: 310px) {
+		.anime-page-wrapper {
+			font-size: 10px;
+		}
+	}
+
 }
 </style>
