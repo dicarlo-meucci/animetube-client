@@ -76,4 +76,5 @@ const breakpoints = {
 .slideshow-container {
 	background: var(--bg-2);
 }
+
 </style>

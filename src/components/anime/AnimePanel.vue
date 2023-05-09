@@ -21,9 +21,7 @@ const anime = store.currentAnime
 	background: var(--bg-4);
 	display: flex;
 	flex-direction: column;
-	margin-left: 20px;
-	margin-top: 20px;
-	margin-right: 20px;
+	margin: 20px;
 	border-radius: 20px;
 	height: 80%;
 	color: var(--text-2);
@@ -41,5 +39,11 @@ const anime = store.currentAnime
 	border-radius: 10px;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+@media screen and (max-width: 690px) {
+	.anime-panel-wrapper {
+		margin-bottom: 0px;
+	}
 }
 </style>

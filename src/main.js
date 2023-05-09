@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-
 import VueSplide from '@splidejs/vue-splide';
 import { createPinia } from 'pinia'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'

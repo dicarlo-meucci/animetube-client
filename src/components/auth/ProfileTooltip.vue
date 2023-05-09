@@ -13,7 +13,7 @@ function handleProfile() {
 <template>
 	<div class="profile-tooltip-wrapper">
 		<div @click="handleProfile" class="profile-tooltip">
-			<v-icon class="pfp" name="fa-user" scale="1.2" />
+			<v-icon class="pfp" name="fa-user" scale="1.2"/>
 		</div>
 	</div>
 </template>

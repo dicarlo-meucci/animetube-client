@@ -1,7 +1,5 @@
 @import 'https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap';
 @import 'https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap';
-@import '@splidejs/splide/css/skyblue';
-
 :root {
 	--bg: #121212;
 	--bg-2: #252525;
@@ -44,4 +42,8 @@ body {
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: var(--text-2);
+}
+
+.vueperslides__arrows * {
+	color: var(--text-2);
 }

@@ -1,9 +1,11 @@
 <script setup>
 import router from '../router'
 import { useStore } from '../store'
-import UserListVue from '../components/user/UserList.vue';
+import UserList from '../components/user/UserList.vue';
+import { onMounted, ref } from 'vue';
 
 const store = useStore()
+const iconScale = ref(6)
 
 async function logout() {
 	await store.API.logout(store.session.token)
@@ -18,17 +20,27 @@ async function pfp() {
 	store.API.pfp()
 }
 
+onMounted(() => {
+	window.onresize = () => {
+		getIconScale()
+	}
+})
 
-
+function getIconScale() {
+	if (window.innerWidth < 690)
+		iconScale.value = 4
+	else
+	iconScale.value = 6
+}
 </script>
 
 <template>
 	<div class="profile-wrapper">
 		<div @click="bannerImage" class="profile-banner">
-
+			
 		</div>
 		<div @click="pfp" class="pfp ">
-			<v-icon name="fa-user" class="resp" />
+			<v-icon name="fa-user" :scale="iconScale"/>
 		</div>
 		<h1>{{ store.session.username }}</h1>
 		<button @click="logout" class="logout-button" type="button">Logout</button>
@@ -42,36 +54,15 @@ async function pfp() {
 <style scoped>
 .pfp {
 	background: var(--bg-2);
-	padding: 10px;
 	width: max-content;
 	height: max-content;
+	padding: 10px;
 	border-radius: 50%;
 	margin-right: 5px;
-	text-align: center;
 	position: absolute;
 	top: 33%;
 	left: 3%;
 }
-
-.resp {
-	scale: 7;
-}
-
-@media screen and (max-width: 800px) {
-	.resp {
-
-		scale: 6;
-	}
-
-}
-
-@media screen and (max-width: 600px) {
-	.resp {
-		scale: 5;
-	}
-}
-
-
 
 .logout-button {
 	width: 20%;
@@ -85,8 +76,8 @@ async function pfp() {
 	cursor: pointer;
 	font-weight: bolder;
 	margin-left: 75%;
-
 }
+
 
 .profile-banner {
 	background: var(--bg-4);
@@ -96,4 +87,11 @@ async function pfp() {
 	padding: 20px;
 	text-align: center;
 	height: 30vh;
-}</style>
+}
+
+@media screen and (max-width: 690px) {
+	.pfp {
+	top: 35%;
+}
+}
+</style>

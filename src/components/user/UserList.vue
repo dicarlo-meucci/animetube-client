@@ -21,8 +21,8 @@ async function reviewList() {
 				</li>
 			</ul>
 		</div>
-		<button :class="logout - button" @click="reviewList()">Tutti i Post</button>
-		<button :class="logout - button" @click="update_source('recenti')">Post Recenti</button>
+		<button class="logout-button" @click="reviewList()">Tutti i Post</button>
+		<button class="logout-button" @click="updateSource('recenti')">Post Recenti</button>
 	</div>
 </template>
 
@@ -35,6 +35,7 @@ async function reviewList() {
 	border-radius: 20px;
 	color: var(--text);
 	padding: 20px;
+	display: none;
 }
 
 .logout-button {
@@ -49,7 +50,7 @@ async function reviewList() {
 	cursor: pointer;
 	font-weight: bolder;
 	margin-left: 75%;
-
+	display: none;
 }
 
 .search-result-wrapper {
@@ -62,5 +63,6 @@ async function reviewList() {
 	border-bottom: 1px solid #000;
 	color: var(--text);
 	padding: 10px 0px 10px 10px;
+	display: none;
 }
 </style>

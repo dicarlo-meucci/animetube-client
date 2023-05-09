@@ -33,4 +33,5 @@ import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue';
 	margin-left: 5px;
 	margin-top: 5px;
 }
+
 </style>
