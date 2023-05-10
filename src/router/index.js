@@ -42,8 +42,10 @@ router.beforeEach(async (to, from) => {
 	const store = useStore()
 	if (to.name === 'Anime') {
 		const id = to.path.split('/')[3]
-		let result = await (await store.API.getAnime(id)).json()
-		store.setAnime(result)
+		if (id) {
+			let result = await (await store.API.getAnime(id)).json()
+			store.setAnime(result)
+		} else router.push('/')
 	}
 
 	if (to.name === 'Profile') {

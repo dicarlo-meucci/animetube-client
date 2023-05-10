@@ -54,6 +54,5 @@ const store = useStore()
 			font-size: 10px;
 		}
 	}
-
 }
 </style>

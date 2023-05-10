@@ -6,25 +6,26 @@ console.log(anime)
 
 async function animeEpisodes() {
 	for (let i = 1; i < array.length; i++) {
-		anime.episodes = array[i];
+		anime.episodes = array[i]
 	}
 }
 </script>
 
 <template>
-    <div class="anime-panel-wrapper">
+	<div class="anime-panel-wrapper">
 		<h1 class="text-episode">Episodi</h1>
-        <a v-for="(episode, key) in anime.episodes" :href="episode.link" target="_blank"><button class="button-wrapper"> {{ key + 1 }} </button></a>
-    </div>
+		<a v-for="(episode, key) in anime.episodes" :href="episode.link" target="_blank"
+			><button class="button-wrapper">{{ key + 1 }}</button></a
+		>
+	</div>
 </template>
 
 <style scoped>
-
 .anime-panel-wrapper {
 	background: var(--bg-4);
 	flex-direction: row;
 	margin-top: 20px;
-    margin-right: 20px;
+	margin-right: 20px;
 	border-radius: 20px;
 	color: var(--text);
 	padding: 20px;

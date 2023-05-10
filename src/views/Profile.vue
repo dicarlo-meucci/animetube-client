@@ -1,8 +1,8 @@
 <script setup>
 import router from '../router'
 import { useStore } from '../store'
-import UserList from '../components/user/UserList.vue';
-import { onMounted, ref } from 'vue';
+import UserList from '../components/user/UserList.vue'
+import { onMounted, ref } from 'vue'
 
 const store = useStore()
 const iconScale = ref(6)
@@ -13,11 +13,16 @@ async function logout() {
 	router.push('/')
 }
 
-async function bannerImage() {
-	store.API.bannerImage()
+async function updateBanner() {
+	const result = await store.API.updateBanner(prompt('link'), store.session.token)
+	if (!result.ok)
+		alert('fai schifo')
 }
-async function pfp() {
-	store.API.pfp()
+
+async function updatePfp() {
+	const result = await store.API.updatePfp(prompt('link'), store.session.token)
+	if (!result.ok)
+		alert('fallito')
 }
 
 onMounted(() => {
@@ -27,25 +32,22 @@ onMounted(() => {
 })
 
 function getIconScale() {
-	if (window.innerWidth < 690)
-		iconScale.value = 4
-	else
-	iconScale.value = 6
+	if (window.innerWidth < 690) iconScale.value = 4
+	else iconScale.value = 6
 }
 </script>
 
 <template>
 	<div class="profile-wrapper">
-		<div @click="bannerImage" class="profile-banner">
-			
+		<div @click="updateBanner" class="profile-banner">
+			<v-icon name="fa-pen" class="pen-icon" :scale="iconScale"/>
 		</div>
-		<div @click="pfp" class="pfp ">
+		<div @click="updatePfp" class="pfp">
 			<v-icon name="fa-user" :scale="iconScale"/>
+			<h2 class="username">@cockandballs</h2>
 		</div>
-		<h1>{{ store.session.username }}</h1>
-		<button @click="logout" class="logout-button" type="button">Logout</button>
-
 	</div>
+	<button @click="logout" class="logout-button" type="button">Logout</button>
 	<div>
 		<UserList />
 	</div>
@@ -55,32 +57,38 @@ function getIconScale() {
 .pfp {
 	background: var(--bg-2);
 	width: max-content;
-	height: max-content;
 	padding: 10px;
 	border-radius: 50%;
-	margin-right: 5px;
 	position: absolute;
 	top: 33%;
 	left: 3%;
 }
 
+.username {
+	position: absolute;
+	color: var(--text-2);
+	margin-top: 20px;
+}
+
 .logout-button {
-	width: 20%;
+	width: 100px;
 	height: 50px;
 	border-radius: 10px;
 	border: 0;
 	background: var(--text-2);
 	color: var(--text);
-	margin-top: 20px;
+	margin-top: 50px;
+	margin-right: 50px;
+	float: right;
 	font-size: 1.4rem;
 	cursor: pointer;
 	font-weight: bolder;
-	margin-left: 75%;
 }
 
-
 .profile-banner {
-	background: var(--bg-4);
+	background: url('https://www.powned.it/wp-content/uploads/2023/03/Immagine-2023-03-09-110527-1200x675.jpg');
+	background-size: cover;
+	background-position: 50%;
 	display: flex;
 	flex-direction: row;
 	color: var(--text);
@@ -89,9 +97,17 @@ function getIconScale() {
 	height: 30vh;
 }
 
+.pen-icon {
+	margin: auto;
+	padding: 20px;
+	border-radius: 50%;
+	background-color: var(--bg-2);
+	display: none;
+}
+
 @media screen and (max-width: 690px) {
 	.pfp {
-	top: 35%;
-}
+		top: 35%;
+	}
 }
 </style>

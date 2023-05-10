@@ -5,7 +5,9 @@ export const useStore = defineStore('store', {
 	state: () => ({
 		API: new API(),
 		anime: {},
-		session: {}
+		session: {
+			username: 'balls'
+		}
 	}),
 	getters: {
 		currentAnime: (state) => state.anime

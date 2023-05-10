@@ -26,6 +26,7 @@ import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue';
 
 .trailer {
 	background: var(--bg-2);
+	height: 100%;
 }
 
 .text-trailer {

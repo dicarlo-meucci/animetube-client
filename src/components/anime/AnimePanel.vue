@@ -1,9 +1,15 @@
 <script setup>
 import AnimeScore from './AnimeScore.vue'
-import AnimeInfo from './AnimeInfo.vue';
+import AnimeInfo from './AnimeInfo.vue'
 import { useStore } from '../../store'
 const store = useStore()
 const anime = store.currentAnime
+
+async function addToList() {
+	const result = await store.API.addToList(anime, store.session.token)
+	if (!result.ok)
+		alert('fallito')
+}
 </script>
 
 <template>
@@ -12,7 +18,10 @@ const anime = store.currentAnime
 		<img class="key-visual" :src="anime.cover" />
 		<h1>Informations</h1>
 		<AnimeInfo />
-		<AnimeScore/>
+		<div @click="addToList">
+			<v-icon name="fa-heart"  :scale="3"/>
+		</div>
+		<AnimeScore />
 	</div>
 </template>
 

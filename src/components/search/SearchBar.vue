@@ -43,7 +43,7 @@ async function displayAnime(id) {
 <template>
 	<div class="search-wrapper">
 		<div class="search-controls">
-			<input v-model="searchTerm" type="text" class="search-input" placeholder="Cerca qui il tuo anime"/>
+			<input v-model="searchTerm" type="text" class="search-input" placeholder="Cerca un anime" />
 			<div class="search-results">
 				<SearchResult
 					v-for="(result, index) in searchResults"
@@ -87,5 +87,4 @@ async function displayAnime(id) {
 	max-width: 300px;
 	display: none;
 }
-
 </style>

@@ -3,19 +3,16 @@ import { useStore } from '../../store'
 const store = useStore()
 const userList = store.list
 
-
-async function reviewList() {
-
-}
+async function reviewList() {}
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
 		<h1 class="text-episode">Episodi</h1>
-		
+
 		<div id="app">
 			<ul>
-				<li v-for="review in reviews" :key="review.user" > 
+				<li v-for="review in reviews" :key="review.user">
 					<p>{{ review.text }}</p>
 					<p>by {{ review.user.username }}</p>
 				</li>
