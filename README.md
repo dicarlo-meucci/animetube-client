@@ -10,6 +10,7 @@
 ```bash
 git clone https://github.com/dicarlo-meucci/animetube-client.git
 cd animetube-client
+npm install
 npm run dev
 ```
 
