@@ -15,17 +15,28 @@ async function logout() {
 
 async function updateBanner() {
 	const result = await store.API.updateBanner(prompt('link'), store.session.token)
-	if (!result.ok)
-		alert('fai schifo')
+	if (!result.ok) {
+		alert('fallito')
+		return
+	}
+
+	await fetchProfile()
 }
 
 async function updatePfp() {
 	const result = await store.API.updatePfp(prompt('link'), store.session.token)
-	if (!result.ok)
+	if (!result.ok) {
 		alert('fallito')
+		return
+	}
+
+	await fetchProfile()
 }
 
 onMounted(() => {
+	window.onload = () => {
+		getIconScale()
+	}
 	window.onresize = () => {
 		getIconScale()
 	}
@@ -35,16 +46,38 @@ function getIconScale() {
 	if (window.innerWidth < 690) iconScale.value = 4
 	else iconScale.value = 6
 }
+
+async function fetchProfile() {
+	const profile = await (await store.API.getProfile(store.session.token)).json()
+	store.setSession({
+		username: profile.username,
+		email: profile.email,
+		banner: profile.banner,
+		pfp: profile.pfp,
+		token: store.session.token
+	})
+}
+
+fetchProfile()
 </script>
 
 <template>
 	<div class="profile-wrapper">
-		<div @click="updateBanner" class="profile-banner">
-			<v-icon name="fa-pen" class="pen-icon" :scale="iconScale"/>
+		<div
+			@click="updateBanner"
+			class="profile-banner"
+			:style="{
+				backgroundImage: `url(${store.session.banner})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover'
+			}"
+		>
+			<v-icon v-if="!store.session.banner" name="fa-pen" class="pen-icon" :scale="iconScale" />
 		</div>
-		<div @click="updatePfp" class="pfp">
-			<v-icon name="fa-user" :scale="iconScale"/>
-			<h2 class="username">@cockandballs</h2>
+		<div @click="updatePfp" class="pfp-wrapper">
+			<img class="pfp" v-if="store.session.pfp" :src="store.session.pfp" />
+			<v-icon v-if="!store.session.pfp" name="fa-user" :scale="iconScale" />
+			<h2 class="username">@{{ store.session.username }}</h2>
 		</div>
 	</div>
 	<button @click="logout" class="logout-button" type="button">Logout</button>
@@ -54,20 +87,29 @@ function getIconScale() {
 </template>
 
 <style scoped>
-.pfp {
+.pfp-wrapper {
 	background: var(--bg-2);
-	width: max-content;
-	padding: 10px;
 	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	border: 3px solid var(--text-2);
 	position: absolute;
-	top: 33%;
-	left: 3%;
+	top: 34%;
+	left: 4%;
+	text-align: center;
+}
+
+.pfp {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	object-fit: cover;
 }
 
 .username {
 	position: absolute;
 	color: var(--text-2);
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .logout-button {
@@ -86,15 +128,17 @@ function getIconScale() {
 }
 
 .profile-banner {
-	background: url('https://www.powned.it/wp-content/uploads/2023/03/Immagine-2023-03-09-110527-1200x675.jpg');
-	background-size: cover;
-	background-position: 50%;
 	display: flex;
-	flex-direction: row;
-	color: var(--text);
+	background: var(--bg-3);
 	padding: 20px;
 	text-align: center;
 	height: 30vh;
+}
+
+.pen-icon:hover {
+	transition: all .1s;
+	color: var(--text-2);
+	transform: rotate(5deg);
 }
 
 .pen-icon {
@@ -102,12 +146,18 @@ function getIconScale() {
 	padding: 20px;
 	border-radius: 50%;
 	background-color: var(--bg-2);
-	display: none;
 }
 
 @media screen and (max-width: 690px) {
+	.pfp-wrapper {
+		width: 90px;
+		height: 90px;
+		top: 36%;
+	}
+
 	.pfp {
-		top: 35%;
+		width: 90px;
+		height: 90px;
 	}
 }
 </style>

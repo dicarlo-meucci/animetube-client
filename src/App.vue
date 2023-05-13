@@ -3,13 +3,6 @@ import Header from './components/Header.vue'
 import router from './router'
 import { useStore } from './store'
 const store = useStore()
-
-function loadSession() {
-	let session = localStorage.getItem('session')
-	if (session) store.setSession(session)
-}
-
-loadSession()
 </script>
 
 <template>

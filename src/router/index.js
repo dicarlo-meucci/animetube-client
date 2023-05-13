@@ -49,7 +49,6 @@ router.beforeEach(async (to, from) => {
 	}
 
 	if (to.name === 'Profile') {
-		return
 		if (!store.session.token) router.push('/')
 	}
 })

@@ -6,7 +6,7 @@ const store = useStore()
 const anime = store.currentAnime
 
 async function addToList() {
-	const result = await store.API.addToList(anime, store.session.token)
+	const result = await store.API.addToList(anime.id, store.session.token)
 	if (!result.ok)
 		alert('fallito')
 }
@@ -18,7 +18,7 @@ async function addToList() {
 		<img class="key-visual" :src="anime.cover" />
 		<h1>Informations</h1>
 		<AnimeInfo />
-		<div @click="addToList">
+		<div v-if="store.session.token" @click="addToList">
 			<v-icon name="fa-heart"  :scale="3"/>
 		</div>
 		<AnimeScore />

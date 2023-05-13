@@ -5,9 +5,7 @@ export const useStore = defineStore('store', {
 	state: () => ({
 		API: new API(),
 		anime: {},
-		session: {
-			username: 'balls'
-		}
+		session: JSON.parse(localStorage.getItem('session')) ?? {}
 	}),
 	getters: {
 		currentAnime: (state) => state.anime
@@ -15,15 +13,23 @@ export const useStore = defineStore('store', {
 	actions: {
 		logout() {
 			this.session = {}
-			localStorage.setItem('session', this.session)
+			localStorage.removeItem('session')
 		},
 		setAnime(anime) {
-			console.log(anime)
 			this.anime = anime
 		},
-		setSession(session) {
-			this.session = session
-			localStorage.setItem('session', this.session)
+		async setSession(session) {
+			const profile = await (await this.API.getProfile(session.token)).json()
+
+			this.session = {
+				token: session.token,
+				username: profile.username,
+				email: profile.email,
+				pfp: profile.pfp,
+				banner: profile.banner,
+			}
+
+			localStorage.setItem('session', JSON.stringify(this.session))
 		}
 	}
 })

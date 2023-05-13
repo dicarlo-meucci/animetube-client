@@ -64,6 +64,14 @@ export default class API {
 		return await fetch(`${this.baseUrl}/api/user/${username}`)
 	}
 
+	async getProfile(token) { 
+		return await fetch(`${this.baseUrl}/api/profile`, {
+			headers: {
+				'X-Auth-Token': token
+			}
+		})
+	}
+
 	async rateAnime(id, stars, comment) {}
 
 	async updatePfp(link, token) {
@@ -93,7 +101,16 @@ export default class API {
 	}
 
 	async addToList(anime, token) {
-		return await fetch(`${this.baseUrl}/api/profile/list/add`)
+		return await fetch(`${this.baseUrl}/api/profile/list/add`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Auth-Token': token
+			},
+			body: JSON.stringify({
+				anime
+			})
+		})
 	}
 	
 	async removeFromList(anime, token) {

@@ -10,8 +10,18 @@ const password = ref()
 
 async function register() {
 	const result = await store.API.register(email.value, username.value, password.value)
-	if (result.ok) store.setSession(await result.json())
+	if (result.ok) {
+		await store.setSession(await result.json())
+		clearFields()
+		router.push('/profile')
+	}
 	else alert((await result.json()).error)
+}
+
+function clearFields() {
+	email.value = ''
+	username.value = ''
+	password.value = ''
 }
 </script>
 
@@ -26,7 +36,7 @@ async function register() {
 			<input v-model="username" name="username" type="text" placeholder="ballsniffer101" />
 			<label for="password">Password</label>
 			<input v-model="password" name="password" type="password" placeholder="******" />
-			<button @click="register" class="register-button" type="button">Registrati</button>
+			<button @click="register" class="register-button" type="submit">Registrati</button>
 			<p @click="router.push('/login')">Login</p>
 		</form>
 	</div>
