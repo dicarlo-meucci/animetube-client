@@ -10,7 +10,7 @@ const options = {
 	snap: true,
 	perPage: 4,
 	perMove: 1,
-	flickPower: 0.,
+	flickPower: 0,
 	breakpoints: {
 		1950: {
 			perPage: 3
@@ -18,10 +18,11 @@ const options = {
 		1500: {
 			perPage: 2
 		},
-		1050: {
+		1000: {
+			arrows: false,
 			perPage: 1
 		}
-	},
+	}
 }
 </script>
 
@@ -31,31 +32,29 @@ const options = {
 			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
-      <SplideSlide>
+			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
-      <SplideSlide>
+			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
-      <SplideSlide>
+			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
-      <SplideSlide>
+			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
-      <SplideSlide>
+			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
-      <SplideSlide>
+			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
-      <SplideSlide>
+			<SplideSlide>
 				<AnimeTrailerCard />
 			</SplideSlide>
 		</Splide>
 	</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

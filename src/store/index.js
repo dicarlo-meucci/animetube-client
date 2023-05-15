@@ -19,16 +19,11 @@ export const useStore = defineStore('store', {
 			this.anime = anime
 		},
 		async setSession(session) {
-			const profile = await (await this.API.getProfile(session.token)).json()
-
-			this.session = {
-				token: session.token,
-				username: profile.username,
-				email: profile.email,
-				pfp: profile.pfp,
-				banner: profile.banner,
-			}
-
+			this.session = session
+			localStorage.setItem('session', JSON.stringify(this.session))
+		},
+		updateSession(key, value) { 
+			this.session[key] = value
 			localStorage.setItem('session', JSON.stringify(this.session))
 		}
 	}

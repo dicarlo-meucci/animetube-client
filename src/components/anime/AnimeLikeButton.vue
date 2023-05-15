@@ -1,6 +1,7 @@
 <script setup>
 import { useStore } from '../../store'
 const store = useStore()
+const anime = store.currentAnime
 
     async function addToList() {
 	const result = await store.API.addToList(anime.id, store.session.token)
@@ -10,7 +11,7 @@ const store = useStore()
 </script>
 
 <template>
-    <div v-if="store.session.token" @click="addToList">
+    <div class="like-button-wrapper" v-if="store.session.token">
 			<button @click="addToList" class="like-button" type="button"> 
 				<v-icon name="fa-star"/> 
 			</button>

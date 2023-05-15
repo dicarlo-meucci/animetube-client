@@ -1,65 +1,37 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 import { useStore } from '../../store'
 const store = useStore()
-const userList = store.list
+const list = ref()
 
-async function reviewList() {}
+async function getList() {
+	list.value = await (await store.API.getProfileList(store.session.token)).json()
+	store.updateSession('list', list.value)
+}
+
+onMounted(async () => {
+	await getList()
+})
 </script>
 
 <template>
-	<div class="anime-panel-wrapper">
-		<h1 class="text-episode">Episodi</h1>
-
-		<div id="app">
+	<div class="user-list-wrapper">
+		<div>
 			<ul>
-				<li v-for="review in reviews" :key="review.user">
-					<p>{{ review.text }}</p>
-					<p>by {{ review.user.username }}</p>
+				<li v-for="anime in store.session.list" :key="anime.id">
+					<p>{{ anime.name }}</p>
+					<p>by {{ anime.description }}</p>
 				</li>
 			</ul>
 		</div>
-		<button class="logout-button" @click="reviewList()">Tutti i Post</button>
-		<button class="logout-button" @click="updateSource('recenti')">Post Recenti</button>
+		<button @click="reviewList()">Tutti i Post</button>
+		<button @click="updateSource('recenti')">Post Recenti</button>
 	</div>
 </template>
 
 <style scoped>
-.anime-panel-wrapper {
-	background: var(--bg-4);
-	flex-direction: row;
-	margin-top: 20px;
-	margin-right: 20px;
-	border-radius: 20px;
-	color: var(--text);
-	padding: 20px;
-	display: none;
+.user-list-wrapper {
+
 }
 
-.logout-button {
-	width: 20%;
-	height: 50px;
-	border-radius: 10px;
-	border: 0;
-	background: var(--text-2);
-	color: var(--text);
-	margin-top: 20px;
-	font-size: 1.4rem;
-	cursor: pointer;
-	font-weight: bolder;
-	margin-left: 75%;
-	display: none;
-}
-
-.search-result-wrapper {
-	display: flex;
-	flex-direction: row;
-	color: #000;
-	align-items: center;
-	overflow: hidden;
-	width: calc(100% - 10px);
-	border-bottom: 1px solid #000;
-	color: var(--text);
-	padding: 10px 0px 10px 10px;
-	display: none;
-}
 </style>

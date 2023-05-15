@@ -34,9 +34,7 @@ async function updatePfp() {
 }
 
 onMounted(() => {
-	window.onload = () => {
-		getIconScale()
-	}
+getIconScale()
 	window.onresize = () => {
 		getIconScale()
 	}
@@ -79,11 +77,12 @@ fetchProfile()
 			<v-icon v-if="!store.session.pfp" name="fa-user" :scale="iconScale" />
 			<h2 class="username">@{{ store.session.username }}</h2>
 		</div>
-	</div>
+
 	<button @click="logout" class="logout-button" type="button">Logout</button>
 	<div>
 		<UserList />
 	</div>
+</div>
 </template>
 
 <style scoped>
@@ -93,10 +92,10 @@ fetchProfile()
 	width: 120px;
 	height: 120px;
 	border: 3px solid var(--text-2);
-	position: absolute;
-	top: 34%;
-	left: 4%;
+	margin-top: -60px;
+	margin-left: 50px;
 	text-align: center;
+	position: relative;
 }
 
 .pfp {
@@ -109,7 +108,7 @@ fetchProfile()
 .username {
 	position: absolute;
 	color: var(--text-2);
-	margin-top: 10px;
+	top: 110%;
 }
 
 .logout-button {
@@ -152,7 +151,8 @@ fetchProfile()
 	.pfp-wrapper {
 		width: 90px;
 		height: 90px;
-		top: 36%;
+		margin-top: -50px;
+		margin-left: 30px;
 	}
 
 	.pfp {
