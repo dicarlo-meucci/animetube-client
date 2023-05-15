@@ -20,13 +20,14 @@ import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue';
 	flex-direction: column;
 }
 
-.home-wrapper div {
-	height: 100%;
-}
 
 .trailer {
 	background: var(--bg-2);
 	height: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .text-trailer {

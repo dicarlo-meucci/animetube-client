@@ -1,17 +1,29 @@
 <script setup></script>
 
 <template>
-	<div class="trailer-card-wrapper">
-        <img src="https://i0.wp.com/www.meganerd.it/wp-content/uploads/2023/03/Naruto-quattro-nuovi-episodi.jpg?resize=840%2C473&ssl=1">
-	</div>
+  <div class="trailer-card-wrapper">
+    <div class="img">
+      <img src="https://staticg.sportskeeda.com/editor/2022/08/53e15-16596004347246.png">
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .trailer-card-wrapper {
-    width: max-content;
-    margin: auto;
-    height: 35vh;
-    padding-top: 20px;
-    padding-bottom: 20px;
+  width: 400px;
+  height: 250px;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  background: #0F0;
+  border-radius: 20px;
+}
+
+img {
+  width: 300px;
+  object-fit: cover;
+  border-radius: 50px
 }
 </style>

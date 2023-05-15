@@ -9,6 +9,8 @@ const options = {
 	rewindByDrag: true,
 	snap: true,
 	perPage: 4,
+	perMove: 1,
+	flickPower: 0.,
 	breakpoints: {
 		1950: {
 			perPage: 3
@@ -19,12 +21,12 @@ const options = {
 		1050: {
 			perPage: 1
 		}
-	}
+	},
 }
 </script>
 
 <template>
-	<div class="trailer-carousel">
+	<div class="trailer-wrapper">
 		<Splide :options="options" aria-labelledby="My Favorite Images">
 			<SplideSlide>
 				<AnimeTrailerCard />
@@ -55,6 +57,5 @@ const options = {
 </template>
 
 <style scoped>
-.trailer-carousel {
-}
+
 </style>

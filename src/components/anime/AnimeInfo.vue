@@ -16,21 +16,18 @@ function getStudioLink(studio) {
 		return 'https://it.wikipedia.org/w/index.php?go=Vai&search=' + studio.replaceAll(' ', '+')
 	}
 }
-
 </script>
 
 <template>
 	<div class="anime-info-wrapper">
-		<p>
-			Studio: <a v-for="studio in studios" :href="getStudioLink(studio)" target="_blank"> {{ studio }} </a>
-		</p>
-		<p>
-			Episodi: <mark> {{ anime.episodes.length }} </mark>
-		</p>
-		<!-- Da fare -->
-		<p>
-			Generi: <mark> {{ anime.tag }} </mark>
-		</p>
+		<h3>Studio</h3>
+	 <a v-for="studio in studios" :href="getStudioLink(studio)" target="_blank"> {{ studio }} </a>
+		<h3>Episodi</h3>
+		<div class="episode">{{ anime.episodes.length }}</div>
+		<h3>Generi</h3>
+		<div class="tag-wrapper">
+		<div class="tag" v-for="tag in anime.tags">{{ tag }}</div>
+		</div>
 	</div>
 	
 </template>
@@ -43,6 +40,12 @@ function getStudioLink(studio) {
 	margin-left: 20px;
 	text-align: left;
 	color: var(--text);
+	text-align: center;
+}
+
+.anime-info-wrapper h3 {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 p {
@@ -50,13 +53,34 @@ p {
 	margin-bottom: 10px;
 }
 
-mark {
-	background-color: transparent;
+
+.tag {
+	width: max-content;
+	background: var(--text-2);
+	padding: 5px;
+	margin: 5px;
+	font-size: 20px;
+	border-radius: 10px;
+	color: #000;
+	cursor: pointer;
+}
+
+.episode {
+	margin: auto;
+	width: max-content;
+	font-size: 1.2rem;
 	color: var(--text-2);
+}
+
+.tag-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 a {
 	color: var(--text-2);
 	text-decoration: none;
+	font-size: 20px;
 }
 </style>

@@ -4,14 +4,33 @@ import AnimeInfo from './AnimeInfo.vue'
 import AnimeLikeButton from './AnimeLikeButton.vue'
 import { useStore } from '../../store'
 const store = useStore()
-const anime = store.currentAnime
+
+async function fetchList(){
+	const profileList = await (await store.API.getProfileList(store.session.token)).json()
+
+	store.setSession({
+		username: profile.username,
+		email: profile.email,
+		banner: profile.banner,
+		pfp: profile.pfp,
+		token: store.session.token,
+		list: profile.list
+		
+	})
+}
+async function sendToAnime(id) {
+	router.push(`/anime/view/${id}`)
+}
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
-		<AnimeLikeButton /> 
-		<h1>{{ anime.name }}</h1>
-		<img class="key-visual" :src="anime.cover" />
+		<div class="title">
+			{{ anime.name }}
+			<AnimeLikeButton /> 
+		</div>
+		<img class="key-visual" :src="anime.cover" @click="sendToAnime(id)"/>
+        <a v-for="list in profile.list"  target="_blank"> {{ anime }} </a>
 		<h1>Informations</h1>
 		<AnimeInfo />
 		<AnimeScore />
@@ -29,11 +48,17 @@ const anime = store.currentAnime
 	color: var(--text-2);
 	padding: 20px;
 	text-align: center;
-	position: relative;
 }
 
 .anime-panel-wrapper * {
 	margin: 5px;
+}
+
+.title {
+	text-align: center;
+	font-weight: bold;
+	font-size: 2em;
+	display: flex;
 }
 
 .key-visual {

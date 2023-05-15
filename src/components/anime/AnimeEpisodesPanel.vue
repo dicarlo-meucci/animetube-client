@@ -14,9 +14,9 @@ async function animeEpisodes() {
 <template>
 	<div class="anime-panel-wrapper">
 		<h1 class="text-episode">Episodi</h1>
-		<a v-for="(episode, key) in anime.episodes" :href="episode.link" target="_blank"
-			><button class="button-wrapper">{{ key + 1 }}</button></a
-		>
+		<a v-for="(episode, key) in anime.episodes" :href="episode.link" target="_blank">
+			<button class="button-wrapper">{{ key + 1 }}</button>
+		</a>
 	</div>
 </template>
 
