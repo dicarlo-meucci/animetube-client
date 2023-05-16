@@ -40,8 +40,6 @@ onMounted(() => {
 <template>
 	<div class="trailer-card-wrapper">
     <div class="trailer-info">
-      <h1>balls</h1>
-      <p>some description here and there</p>
       <button class="play-button">
         <v-icon name="fa-play"></v-icon>
       </button>
@@ -103,4 +101,7 @@ img:hover {
   transition: all .2s;
   opacity: .7;
 }
+
+
+
 </style>

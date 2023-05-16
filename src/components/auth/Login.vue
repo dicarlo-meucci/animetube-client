@@ -11,7 +11,7 @@ const password = ref()
 async function login() {
 	const result = await store.API.login(username.value, password.value)
 	if (result.ok) {
-		await store.setSession(await result.json())
+		store.setSession(await result.json())
 		clearFields()
 		router.push('/')
 	} else alert((await result.json()).error)

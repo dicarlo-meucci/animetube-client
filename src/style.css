@@ -48,3 +48,15 @@ body {
 .default {
 	color: var(--text-2);
 }
+
+.splide__arrow {
+	background: var(--text-2) !important;
+}
+
+.splide__pagination__page.is-active {
+	background: var(--text-2) !important;
+}
+
+.splide__arrow svg {
+	fill: var(--text) !important;
+}

@@ -38,9 +38,9 @@ function getStudioLink(studio) {
 	flex-direction: column;
 	margin-right: 20px;
 	margin-left: 20px;
-	text-align: left;
 	color: var(--text);
 	text-align: center;
+	font-weight: bold;
 }
 
 .anime-info-wrapper h3 {
@@ -61,8 +61,7 @@ p {
 	margin: 5px;
 	font-size: 20px;
 	border-radius: 10px;
-	color: #000;
-	cursor: pointer;
+	color: var(--bg);
 }
 
 .episode {

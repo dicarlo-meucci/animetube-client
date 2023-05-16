@@ -18,11 +18,11 @@ export const useStore = defineStore('store', {
 		setAnime(anime) {
 			this.anime = anime
 		},
-		async setSession(session) {
+		setSession(session) {
 			this.session = session
 			localStorage.setItem('session', JSON.stringify(this.session))
 		},
-		updateSession(key, value) { 
+		updateSession(key, value) {
 			this.session[key] = value
 			localStorage.setItem('session', JSON.stringify(this.session))
 		}

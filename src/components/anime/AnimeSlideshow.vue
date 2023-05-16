@@ -8,7 +8,7 @@ const slides = [
 		image: 'https://www.akibagamers.it/wp-content/uploads/2022/12/blue-lock-anime-01-1620x800.jpg'
 	},
 	{
-		image: 'https://sm.ign.com/t/ign_it/screenshot/default/genshin-ufotale_kt8y.1280.png'
+		image: 'https://www.tomshw.it/images/images/2022/09/assassination-classroom-5-motivi-247684.jpg'
 	},
 	{
 		image: 'https://www.artribune.com/wp-content/uploads/2023/03/Naruto.jpg'
