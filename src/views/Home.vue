@@ -1,14 +1,14 @@
 <script setup>
 import AnimeSlideshow from '../components/anime/AnimeSlideshow.vue'
-import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue';
+import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue'
 </script>
 
 <template>
 	<div class="home-wrapper">
-		<AnimeSlideshow/>
+		<AnimeSlideshow />
 
 		<div class="trailer">
-			<AnimeTrailerPanel/>
+			<AnimeTrailerPanel />
 		</div>
 	</div>
 </template>
@@ -19,7 +19,6 @@ import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue';
 	display: flex;
 	flex-direction: column;
 }
-
 
 .trailer {
 	background: var(--bg-2);
@@ -35,5 +34,4 @@ import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue';
 	margin-left: 5px;
 	margin-top: 5px;
 }
-
 </style>

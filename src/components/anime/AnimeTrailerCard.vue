@@ -39,11 +39,11 @@ onMounted(() => {
 
 <template>
 	<div class="trailer-card-wrapper">
-    <div class="trailer-info">
-      <button class="play-button">
-        <v-icon name="fa-play"></v-icon>
-      </button>
-    </div>
+		<div class="trailer-info">
+			<button class="play-button">
+				<v-icon name="fa-play"></v-icon>
+			</button>
+		</div>
 		<div class="trailer-thumbnail">
 			<img src="https://staticg.sportskeeda.com/editor/2022/08/53e15-16596004347246.png" />
 		</div>
@@ -64,44 +64,37 @@ onMounted(() => {
 }
 
 .trailer-info {
-  position: absolute;
-  transform: translate(50%, 50%);
-  right: 50%;
-  bottom: 50%;
-  z-index: 1;
-  pointer-events: none;
-  text-shadow: 0px 0px 5px #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 60%;
+	position: absolute;
+	transform: translate(50%, 50%);
+	right: 50%;
+	bottom: 50%;
+	z-index: 1;
+	pointer-events: none;
+	display: flex;
 }
 
 .play-button {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  background: #bf57ff;
-  border: 2px solid var(--text-2);
-  margin: auto;
-  color: #FFF;
-  text-align: center;
-  pointer-events: all;
-  cursor: pointer;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	background: #bf57ff;
+	border: 2px solid var(--text-2);
+	margin: auto;
+	color: #fff;
+	text-align: center;
+	pointer-events: all;
+	cursor: pointer;
 }
 
 img {
 	width: 95%;
 	border-radius: 15px;
 	object-fit: cover;
-  border: 3px solid var(--text-2);
+	border: 3px solid var(--text-2);
 }
 
 img:hover {
-  transition: all .2s;
-  opacity: .7;
+	transition: all 0.2s;
+	box-shadow: 0 0 10px var(--text-2);
 }
-
-
-
 </style>

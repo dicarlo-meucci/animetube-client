@@ -34,7 +34,7 @@ async function updatePfp() {
 }
 
 onMounted(() => {
-getIconScale()
+	getIconScale()
 	window.onresize = () => {
 		getIconScale()
 	}
@@ -47,13 +47,10 @@ function getIconScale() {
 
 async function fetchProfile() {
 	const profile = await (await store.API.getProfile(store.session.token)).json()
-	store.setSession({
-		username: profile.username,
-		email: profile.email,
-		banner: profile.banner,
-		pfp: profile.pfp,
-		token: store.session.token
-	})
+	store.updateSession('username', profile.username)
+	store.updateSession('email', profile.email)
+	store.updateSession('banner', profile.banner)
+	store.updateSession('pfp', profile.pfp)
 }
 
 fetchProfile()
@@ -77,17 +74,21 @@ fetchProfile()
 			<v-icon v-if="!store.session.pfp" name="fa-user" :scale="iconScale" />
 			<h2 class="username">@{{ store.session.username }}</h2>
 		</div>
-	<div class="profile-info">
-		<button @click="logout" class="logout-button" type="button">Logout</button>
-		<UserList />
+		<div class="profile-info">
+			<button @click="logout" class="logout-button" type="button">Logout</button>
+			<!-- <UserList /> -->
+		</div>
 	</div>
-</div>
 </template>
 
 <style scoped>
 .profile-wrapper {
 	position: relative;
 	height: calc(100vh - 60px);
+}
+
+.profile-info {
+	position: relative;
 }
 
 .pfp-wrapper {
@@ -110,9 +111,8 @@ fetchProfile()
 }
 
 .username {
-	position: absolute;
 	color: var(--text-2);
-	top: 110%;
+	margin-top: 15px;
 }
 
 .logout-button {
@@ -139,7 +139,7 @@ fetchProfile()
 }
 
 .pen-icon:hover {
-	transition: all .1s;
+	transition: all 0.1s;
 	color: var(--text-2);
 	transform: rotate(5deg);
 }
@@ -162,6 +162,10 @@ fetchProfile()
 	.pfp {
 		width: 90px;
 		height: 90px;
+	}
+
+	.username {
+		margin-top: 20px;
 	}
 }
 </style>

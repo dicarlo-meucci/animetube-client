@@ -1,6 +1,6 @@
 export default class API {
 	//baseUrl = `${window.location.protocol}//${window.location.host}`
-	baseUrl = 'http://172.24.126.75:3000'
+	baseUrl = 'http://192.168.1.100:3000'
 	constructor() {
 		let css = 'text-shadow: 1px 1px 2px black, 0 0 1em lime, 0 0 0.2em lime; font-size: 30px;'
 		console.log('%cAPI Initialized!', css)
@@ -72,7 +72,7 @@ export default class API {
 		})
 	}
 
-	async rateAnime(id, stars, comment) { }
+	async rateAnime(id, stars, comment) {}
 
 	async updatePfp(link, token) {
 		return await fetch(`${this.baseUrl}/api/profile/picture`, {

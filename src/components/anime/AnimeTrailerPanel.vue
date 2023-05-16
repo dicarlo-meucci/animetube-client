@@ -12,13 +12,16 @@ const options = {
 	perMove: 1,
 	flickPower: 0,
 	breakpoints: {
-		1950: {
+		2000: {
 			perPage: 3
 		},
 		1500: {
 			perPage: 2
 		},
-		1000: {
+		900: {
+			arrows: false
+		},
+		800: {
 			arrows: false,
 			perPage: 1
 		}

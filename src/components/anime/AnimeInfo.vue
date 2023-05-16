@@ -20,16 +20,15 @@ function getStudioLink(studio) {
 
 <template>
 	<div class="anime-info-wrapper">
-		<h3>Studio</h3>
-	 <a v-for="studio in studios" :href="getStudioLink(studio)" target="_blank"> {{ studio }} </a>
-		<h3>Episodi</h3>
+		<h2>Studio</h2>
+		<a v-for="studio in studios" :href="getStudioLink(studio)" target="_blank"> {{ studio }} </a>
+		<h2>Episodi</h2>
 		<div class="episode">{{ anime.episodes.length }}</div>
-		<h3>Generi</h3>
+		<h2>Generi</h2>
 		<div class="tag-wrapper">
-		<div class="tag" v-for="tag in anime.tags">{{ tag }}</div>
+			<div class="tag" v-for="tag in anime.tags">{{ tag }}</div>
 		</div>
 	</div>
-	
 </template>
 
 <style scoped>
@@ -53,13 +52,12 @@ p {
 	margin-bottom: 10px;
 }
 
-
 .tag {
-	width: max-content;
 	background: var(--text-2);
+	height: 25px;
 	padding: 5px;
 	margin: 5px;
-	font-size: 20px;
+	font-size: 1.2rem;
 	border-radius: 10px;
 	color: var(--bg);
 }
@@ -72,9 +70,12 @@ p {
 }
 
 .tag-wrapper {
-	width: 100%;
+	width: 90%;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
+	align-items: center;
+	margin: auto;
 }
 
 a {

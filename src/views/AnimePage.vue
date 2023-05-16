@@ -1,7 +1,6 @@
 <script setup>
 import AnimePanel from '../components/anime/AnimePanel.vue'
 import AnimeReviews from '../components/anime/AnimeReviewsPanel.vue'
-import AnimeScore from '../components/anime/AnimeScore.vue'
 import AnimeEpisodes from '../components/anime/AnimeEpisodesPanel.vue'
 import AnimeDescription from '../components/anime/AnimeDescription.vue'
 import router from '../router'
@@ -12,7 +11,7 @@ const store = useStore()
 
 <template>
 	<div class="anime-page-wrapper">
-		<AnimePanel></AnimePanel>
+		<AnimePanel/>
 		<div class="anime-community-info">
 			<AnimeDescription />
 			<AnimeEpisodes />
@@ -27,10 +26,7 @@ const store = useStore()
 	height: flex;
 	display: flex;
 	flex-direction: row;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	margin-left: 25px;
-	margin-right: 25px;
+	margin: 25px;
 	border-radius: 25px;
 }
 

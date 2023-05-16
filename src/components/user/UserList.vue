@@ -30,13 +30,10 @@ onMounted(async () => {
 			<div class="anime-info">
 				<h1>{{ anime.name }}</h1>
 				<p>by {{ anime.studio }}</p>
-				<p>Episodi: {{anime.episodes}}</p>
+				<p>Episodi: {{ anime.episodes }}</p>
 			</div>
 		</div>
 	</div>
-
-	<!-- <button @click="reviewList()">Tutti i Post</button>
-	<button @click="updateSource('recenti')">Post Recenti</button> -->
 </template>
 
 <style scoped>
@@ -67,8 +64,8 @@ onMounted(async () => {
 }
 @media screen and (max-width: 690px) {
 	h1 {
-font-size: 2 0px;
-}
+		font-size: 2 0px;
+	}
 	.key-visual {
 		width: 80px;
 		object-fit: scale-down;

@@ -14,8 +14,7 @@ async function register() {
 		await store.setSession(await result.json())
 		clearFields()
 		router.push('/profile')
-	}
-	else alert((await result.json()).error)
+	} else alert((await result.json()).error)
 }
 
 function clearFields() {
