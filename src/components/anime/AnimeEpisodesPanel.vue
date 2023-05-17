@@ -1,14 +1,6 @@
 <script setup>
-import { useStore } from '../../store'
-const store = useStore()
-const anime = store.currentAnime
-console.log(anime)
-
-async function animeEpisodes() {
-	for (let i = 1; i < array.length; i++) {
-		anime.episodes = array[i]
-	}
-}
+import { useAnimeStore } from '../../stores/anime'
+const anime = useAnimeStore()
 </script>
 
 <template>

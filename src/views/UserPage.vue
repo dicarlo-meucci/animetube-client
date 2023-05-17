@@ -1,40 +1,14 @@
 <script setup>
 import router from '../router'
-import { useSessionStore } from '../stores/session'
-import { useAPIStore } from '../stores/api'
 import UserList from '../components/user/UserList.vue'
 import { onMounted, ref } from 'vue'
+import { useAPIStore } from '../stores/api'
 
-const session = useSessionStore()
 const { API } = useAPIStore()
 
+const username = window.location.href.split('/')[window.location.href.split('/').length - 1]
 const iconScale = ref(6)
-
-async function logout() {
-	await API.logout(session.token)
-	session.clearSession()
-	router.push('/')
-}
-
-async function updateBanner() {
-	const result = await API.updateBanner(prompt('link'), session.token)
-	if (!result.ok) {
-		alert('fallito')
-		return
-	}
-
-	await fetchProfile()
-}
-
-async function updatePfp() {
-	const result = await API.updatePfp(prompt('link'), session.token)
-	if (!result.ok) {
-		alert('fallito')
-		return
-	}
-
-	await fetchProfile()
-}
+const user = ref({})
 
 onMounted(() => {
 	getIconScale()
@@ -49,13 +23,15 @@ function getIconScale() {
 }
 
 async function fetchProfile() {
-	const profile = await (await API.getProfile(session.token)).json()
-	session.setUsername(profile.username)
-	session.setEmail(profile.email)
-	session.setBanner(profile.banner)
-	session.setPfp(profile.pfp)
-}
+	const result = await API.getUserProfile(username)
 
+	if (!result.ok) {
+		router.push('/NotFound')
+		return
+	}
+
+	user.value = await result.json()
+}
 fetchProfile()
 </script>
 
@@ -65,22 +41,17 @@ fetchProfile()
 			@click="updateBanner"
 			class="profile-banner"
 			:style="{
-				backgroundImage: `url(${session.banner})`,
+				backgroundImage: `url(${user.banner})`,
 				backgroundRepeat: 'no-repeat',
 				backgroundSize: 'cover'
 			}"
-		>
-			<v-icon v-if="!session.banner" name="fa-pen" class="pen-icon" :scale="iconScale" />
+		></div>
+		<div class="pfp-wrapper">
+			<img class="pfp" v-if="user.pfp" :src="user.pfp" />
+			<v-icon v-if="!user.pfp" name="fa-user" :scale="iconScale" />
+			<h2 class="username">@{{ user.username }}</h2>
 		</div>
-		<div @click="updatePfp" class="pfp-wrapper">
-			<img class="pfp" v-if="session.pfp" :src="session.pfp" />
-			<v-icon v-if="!session.pfp" name="fa-user" :scale="iconScale" />
-			<h2 class="username">@{{ session.username }}</h2>
-		</div>
-		<div class="profile-info">
-			<button @click="logout" class="logout-button" type="button">Logout</button>
-			<!-- <UserList /> -->
-		</div>
+		<div class="profile-info"></div>
 	</div>
 </template>
 

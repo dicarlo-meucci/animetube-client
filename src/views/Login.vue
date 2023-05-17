@@ -1,7 +1,9 @@
 <script setup>
-import LoginPanel from '../components/auth/Login.vue'
-import { useStore } from '../store'
-const store = useStore()
+import LoginPanel from '../components/auth/LoginPanel.vue'
+import { useSessionStore } from '../stores/session'
+import { useAPIStore } from '../stores/api'
+const { API } = useAPIStore()
+const session = useSessionStore()
 </script>
 
 <template>

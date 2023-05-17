@@ -1,17 +1,53 @@
 <script setup>
-import { useStore } from '../../store'
-const store = useStore()
-const anime = store.currentAnime
+import router from '../../router'
+import { useAnimeStore } from '../../stores/anime'
+import { useAPIStore } from '../../stores/api'
+import { useSessionStore } from '../../stores/session'
+import { ref } from 'vue'
+
+const { API } = useAPIStore()
+const anime = useAnimeStore()
+const session = useSessionStore()
+
+const text = ref('')
+const rating = ref(0)
+
+function clearFields() {
+	text.value = ''
+	rating.value = 0
+}
+
+async function getScore() {
+	const result = await API.getAnimeScore(anime.id)
+	if (result.ok) anime.setScore((await result.json()).score)
+}
+
+async function postReview() {
+	const result = await API.postReview(session.token, anime.id, rating.value, text.value)
+
+	if (!result.ok) {
+		alert((await result.json()).error)
+		return
+	}
+
+	clearFields()
+	await getScore()
+}
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
 		<h1 class="text-review">Recensioni</h1>
 		<div class="review-controls">
-			<textarea class="description-wrapper" type="text" placeholder="Lascia una recensione..."></textarea>
-			<input orient="vertical" class="rating" type="range" min="1" max="100" />
+			<textarea
+				v-model="text"
+				class="description-wrapper"
+				type="text"
+				placeholder="Lascia una recensione..."
+			></textarea>
+			<input v-model="rating" orient="vertical" class="rating" type="range" min="1" max="100" />
 		</div>
-		<button type="submit" class="publish-button">Pubblica</button>
+		<button @click="postReview" type="submit" class="publish-button">Pubblica</button>
 	</div>
 </template>
 

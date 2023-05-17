@@ -1,19 +1,24 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useStore } from '../../store'
 import AnimeScore from '../anime/AnimeScore.vue'
 import AnimeInfo from '../anime/AnimeInfo.vue'
 import AnimeLikeButton from '../anime/AnimeLikeButton.vue'
-const store = useStore()
-const list = ref()
+import { useSessionStore } from '../../stores/session'
+import { useAPIStore } from '../../stores/api'
+const { API } = useAPIStore()
+const session = useSessionStore()
 
 async function sendToAnime(id) {
 	router.push(`/anime/view/${id}`)
 }
 
 async function getList() {
-	list.value = await (await store.API.getProfileList(store.session.token)).json()
-	store.updateSession('list', list.value)
+	const result = await store.API.getProfileList(store.session.token)
+
+	if (!result.ok) return
+
+	const list = await result.json()
+	store.updateSession('list', list)
 }
 
 onMounted(async () => {

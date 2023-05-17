@@ -1,7 +1,7 @@
 <script setup>
-import { useStore } from '../../store'
-const store = useStore()
-const anime = store.currentAnime
+import { useAnimeStore } from '../../stores/anime'
+const anime = useAnimeStore()
+
 const studios = anime.studio.split(', ')
 
 if (studios.length > 1) studios[1] = ', ' + studios[1]
@@ -59,7 +59,7 @@ p {
 	margin: 5px;
 	font-size: 1.2rem;
 	border-radius: 10px;
-	color: var(--bg);
+	color: var(--text);
 }
 
 .episode {

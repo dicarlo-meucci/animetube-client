@@ -2,27 +2,38 @@
 import AnimeScore from './AnimeScore.vue'
 import AnimeInfo from './AnimeInfo.vue'
 import AnimeLikeButton from './AnimeLikeButton.vue'
-import { useStore } from '../../store'
-const store = useStore()
-const anime = store.currentAnime
+import { useAnimeStore } from '../../stores/anime'
+import { useSessionStore } from '../../stores/session'
+import { useAPIStore } from '../../stores/api'
+import { onBeforeMount, ref } from 'vue'
+const anime = useAnimeStore()
+const session = useSessionStore()
+const { API } = useAPIStore()
+const isLiked = ref(false)
 
 async function getList() {
-	list.value = await (await store.API.getProfileList(store.session.token)).json()
-	store.updateSession('list', list.value)
+	const result = await API.getProfileList(session.token)
+
+	if (!result.ok) return
+
+	const list = await result.json()
+	session.setList(list)
 }
 
 async function checkLiked() {
-	if (!store.session.list) {
-		await getList()
-	}
+	if (!session.list.length) await getList()
 
-	return !!store.session.list.find((a) => a.id == anime.id)
+	isLiked.value = !!session.list.find((a) => a.id == anime.id)
 }
+
+onBeforeMount(async () => {
+	await checkLiked()
+})
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
-		<AnimeLikeButton :toggled="checkLiked()" />
+		<AnimeLikeButton :toggled="isLiked" />
 		<h1>{{ anime.name }}</h1>
 		<img class="key-visual" :src="anime.cover" />
 		<h1>Informazioni</h1>
@@ -57,7 +68,6 @@ async function checkLiked() {
 }
 
 @media screen and (max-width: 690px) {
-
 	.key-visual {
 		width: 250px;
 	}
@@ -67,12 +77,11 @@ async function checkLiked() {
 }
 
 @media screen and (max-width: 400px) {
-
-.key-visual {
-	width: 200px;
-}
-.anime-panel-wrapper {
-	margin-bottom: 0px;
-}
+	.key-visual {
+		width: 200px;
+	}
+	.anime-panel-wrapper {
+		margin-bottom: 0px;
+	}
 }
 </style>

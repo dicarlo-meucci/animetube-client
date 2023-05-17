@@ -1,22 +1,34 @@
 <script setup>
-import { useStore } from '../../store'
-const store = useStore()
-const anime = store.currentAnime
+import { useAnimeStore } from '../../stores/anime'
+import { useAPIStore } from '../../stores/api'
+import { useSessionStore } from '../../stores/session'
+import { ref } from 'vue'
 
-defineProps({
+const props = defineProps({
 	toggled: Boolean
 })
 
-async function addToList() {
-	const result = await store.API.addToList(anime.id, store.session.token)
-	if (!result.ok) alert('fallito')
-}
+const anime = useAnimeStore()
+const { API } = useAPIStore()
+const session = useSessionStore()
 
-console.log()
+const toggled = ref(props.toggled)
+
+async function addToList() {
+	const result = await API.addToList(anime.id, session.token)
+
+	if (!result.ok) {
+		alert('fallito')
+		return
+	}
+
+	session.addToList(JSON.parse(JSON.stringify(anime)))
+	toggled.value = !toggled.value
+}
 </script>
 
 <template>
-	<div class="like-button-wrapper" v-if="store.session.token">
+	<div class="like-button-wrapper" v-if="session.token">
 		<button @click="addToList" class="like-button" type="button" :disabled="toggled">
 			<v-icon name="fa-star" />
 		</button>
@@ -41,6 +53,6 @@ console.log()
 
 .like-button:disabled {
 	background: #ff0056;
-	color: #FF0;
+	color: #ff0;
 }
 </style>

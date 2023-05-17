@@ -1,7 +1,4 @@
-<script setup>
-import { useStore } from '../store'
-const store = useStore()
-</script>
+<script setup></script>
 
 <template>
 	<div class="notfound-wrapper">

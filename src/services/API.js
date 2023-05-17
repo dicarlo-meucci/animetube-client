@@ -61,7 +61,7 @@ export default class API {
 	}
 
 	async getUserProfile(username) {
-		return await fetch(`${this.baseUrl}/api/user/${username}`)
+		return await fetch(`${this.baseUrl}/api/users/${username}`)
 	}
 
 	async getProfile(token) {
@@ -72,7 +72,16 @@ export default class API {
 		})
 	}
 
-	async rateAnime(id, stars, comment) {}
+	async postReview(token, anime, score, text) {
+		return await fetch(`${this.baseUrl}/api/anime/review`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Auth-Token': token
+			},
+			body: JSON.stringify({ anime, score, text })
+		})
+	}
 
 	async updatePfp(link, token) {
 		return await fetch(`${this.baseUrl}/api/profile/picture`, {

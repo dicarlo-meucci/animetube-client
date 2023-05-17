@@ -2,17 +2,17 @@
 import SearchResult from './SearchResult.vue'
 import { ref, watch, onMounted, nextTick } from 'vue'
 import gsap from 'gsap'
-import { useStore } from '../../store'
+import { useAPIStore } from '../../stores/api'
 import router from '../../router'
-const store = useStore()
+const { API } = useAPIStore()
 const searchTerm = ref()
 const searchResults = ref([])
-// Define a variable to keep track of the animation timeline
+
 let animationTimeline = null
 let firstInteraction = true
 
 watch(searchTerm, async (newValue, oldValue) => {
-	if (newValue) searchResults.value = await store.API.searchAnime(newValue)
+	if (newValue) searchResults.value = await API.searchAnime(newValue)
 })
 
 // Watch the searchTerm variable

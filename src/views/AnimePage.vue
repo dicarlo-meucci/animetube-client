@@ -4,14 +4,14 @@ import AnimeReviews from '../components/anime/AnimeReviewsPanel.vue'
 import AnimeEpisodes from '../components/anime/AnimeEpisodesPanel.vue'
 import AnimeDescription from '../components/anime/AnimeDescription.vue'
 import router from '../router'
-import { useStore } from '../store'
+import { useAnimeStore } from '../stores/anime'
 import { onMounted, ref, watch } from 'vue'
-const store = useStore()
+const anime = useAnimeStore()
 </script>
 
 <template>
 	<div class="anime-page-wrapper">
-		<AnimePanel/>
+		<AnimePanel />
 		<div class="anime-community-info">
 			<AnimeDescription />
 			<AnimeEpisodes />
@@ -31,6 +31,7 @@ const store = useStore()
 }
 
 .anime-community-info {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;

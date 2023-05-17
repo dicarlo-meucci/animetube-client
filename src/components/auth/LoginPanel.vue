@@ -1,55 +1,54 @@
 <script setup>
-import { useStore } from '../../store'
+import { useSessionStore } from '../../stores/session'
+import { useAPIStore } from '../../stores/api'
 import logo from '../../assets/at-logo.png'
 import router from '../../router'
 import { ref } from 'vue'
-const store = useStore()
-const email = ref()
+
+const session = useSessionStore()
+const { API } = useAPIStore()
+
 const username = ref()
 const password = ref()
 
-async function register() {
-	const result = await store.API.register(email.value, username.value, password.value)
+async function login() {
+	const result = await API.login(username.value, password.value)
 	if (result.ok) {
-		await store.setSession(await result.json())
+		session.setToken((await result.json()).token)
 		clearFields()
-		router.push('/profile')
+		router.push('/')
 	} else alert((await result.json()).error)
 }
 
 function clearFields() {
-	email.value = ''
 	username.value = ''
 	password.value = ''
 }
 </script>
 
 <template>
-	<div class="register-wrapper">
-		<form @submit.prevent="register" class="register-form">
+	<div class="login-wrapper">
+		<form @submit.prevent="login" class="login-form">
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
-			<label for="email">Email</label>
-			<input v-model="email" name="email" type="text" placeholder="balls@gmail.com" />
-			<label for="username">Username</label>
-			<input v-model="username" name="username" type="text" placeholder="ballsniffer101" />
+			<label for="email">Email / Username</label>
+			<input v-model="username" name="email" type="text" placeholder="email@gmail.com" />
 			<label for="password">Password</label>
-			<input v-model="password" name="password" type="password" placeholder="******" />
-			<button @click="register" class="register-button" type="submit">Registrati</button>
-			<p @click="router.push('/login')">Login</p>
+			<input v-model="password" name="password" type="password" placeholder="password" />
+			<button class="login-button" type="submit">Entra</button>
+			<p @click="router.push('/register')">Registrazione</p>
 		</form>
 	</div>
 </template>
 
 <style scoped>
-.register-wrapper {
+.login-wrapper {
 	width: 100%;
 	height: max-content;
 	margin: auto;
-	margin-top: 50px;
 }
 
-.register-form {
+.login-form {
 	width: 25%;
 	display: flex;
 	flex-direction: column;
@@ -60,7 +59,7 @@ function clearFields() {
 	padding: 25px;
 }
 
-.register-form *:not(label) {
+.login-form *:not(label) {
 	padding: 10px;
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -81,7 +80,7 @@ img {
 	border: 5px solid var(--text-2);
 }
 
-.register-button {
+.login-button {
 	width: 50%;
 	border-radius: 10px;
 	border: 0;
@@ -102,7 +101,7 @@ h1 {
 }
 
 @media screen and (max-width: 1300px) {
-	.register-form {
+	.login-form {
 		width: 35%;
 		display: flex;
 		flex-direction: column;
@@ -115,7 +114,7 @@ h1 {
 }
 
 @media screen and (max-width: 1000px) {
-	.register-form {
+	.login-form {
 		width: 40%;
 		display: flex;
 		flex-direction: column;
@@ -128,7 +127,7 @@ h1 {
 }
 
 @media screen and (max-width: 800px) {
-	.register-form {
+	.login-form {
 		width: 70%;
 		display: flex;
 		flex-direction: column;

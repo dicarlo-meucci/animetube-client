@@ -1,8 +1,9 @@
 <script setup>
 import Header from './components/Header.vue'
 import router from './router'
-import { useStore } from './store'
-const store = useStore()
+import { useSessionStore } from './stores/session'
+const session = useSessionStore()
+session.loadSession()
 </script>
 
 <template>
