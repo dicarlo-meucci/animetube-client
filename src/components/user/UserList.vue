@@ -44,7 +44,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.user-list-wrapper{
+.user-list-wrapper {
 	padding: 10px;
 	width: max-content;
 	display: flex;
@@ -64,7 +64,6 @@ onMounted(async () => {
 	border-radius: 15px;
 	background: var(--bg-2);
 	margin-top: 10px;
-
 }
 .anime-info {
 	display: flex;
@@ -75,8 +74,6 @@ onMounted(async () => {
 	width: 100px;
 	object-fit: scale-down;
 	border-radius: 10px;
-
-	
 }
 
 .anime-info * {
@@ -90,15 +87,11 @@ onMounted(async () => {
 		width: 80px;
 		object-fit: scale-down;
 		border-radius: 10px;
-		
-		
 	}
 }
 @media screen and (max-width: 690px) {
-
-	.user-list-wrapper{
-
-	margin-top: 20%;
-}
+	.user-list-wrapper {
+		margin-top: 20%;
+	}
 }
 </style>

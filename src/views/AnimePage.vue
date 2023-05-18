@@ -33,6 +33,7 @@ const anime = useAnimeStore()
 }
 
 .anime-community-info {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
@@ -40,11 +41,18 @@ const anime = useAnimeStore()
 }
 
 @media screen and (max-width: 690px) {
+	.anime-community-info {
+		width: initial;
+	}
+
 	.anime-page-wrapper {
 		flex-direction: column;
 	}
 
-@media screen and (max-width: 310px) {
+	@media screen and (max-width: 310px) {
+		.anime-community-info {
+			width: initial;
+		}
 		.anime-page-wrapper {
 			font-size: 10px;
 		}

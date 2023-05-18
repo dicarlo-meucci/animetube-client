@@ -33,7 +33,7 @@ onBeforeMount(async () => {
 
 <template>
 	<div class="anime-panel-wrapper">
-		<AnimeLikeButton :toggled="isLiked" />
+		<AnimeLikeButton :isLiked="isLiked" />
 		<h1>{{ anime.name }}</h1>
 		<img class="key-visual" :src="anime.cover" />
 		<h1>Informazioni</h1>
@@ -82,6 +82,12 @@ onBeforeMount(async () => {
 	}
 	.anime-panel-wrapper {
 		margin-bottom: 0px;
+	}
+}
+
+@media screen and (max-width: 300px) {
+	.key-visual {
+		width: 100px;
 	}
 }
 </style>

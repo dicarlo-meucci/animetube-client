@@ -43,8 +43,7 @@ export const useSessionStore = defineStore('session', {
 			)
 		},
 		loadSession() {
-			if (localStorage.getItem('session'))
-			{
+			if (localStorage.getItem('session')) {
 				const { token, username, email, pfp, banner, list } = JSON.parse(localStorage.getItem('session'))
 				this.setSession({ token, username, email, pfp, banner, list })
 				this.saveSession()
@@ -78,6 +77,10 @@ export const useSessionStore = defineStore('session', {
 			if (!this.list) this.list = []
 
 			this.list.push(anime)
+			this.saveSession()
+		},
+		removeFromList(anime) {
+			this.list = this.list.filter((a) => a.id !== anime.id)
 			this.saveSession()
 		}
 	}

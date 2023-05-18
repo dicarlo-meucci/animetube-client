@@ -1,6 +1,6 @@
 export default class API {
 	//baseUrl = `${window.location.protocol}//${window.location.host}`
-	baseUrl = 'http://172.24.126.75:3000'
+	baseUrl = 'http://localhost:3000'
 	constructor() {
 		let css = 'text-shadow: 1px 1px 2px black, 0 0 1em lime, 0 0 0.2em lime; font-size: 30px;'
 		console.log('%cAPI Initialized!', css)
@@ -49,7 +49,7 @@ export default class API {
 	}
 
 	async getAnime(id) {
-		return await fetch(`${this.baseUrl}/api/anime/view/${id}`)
+		return await fetch(`${this.baseUrl}/api/anime/${id}`)
 	}
 
 	async getAnimeList() {
@@ -57,7 +57,7 @@ export default class API {
 	}
 
 	async getAnimeScore(id) {
-		return await fetch(`${this.baseUrl}/api/anime/score/${id}`)
+		return await fetch(`${this.baseUrl}/api/anime/${id}/score`)
 	}
 
 	async getUserProfile(username) {
@@ -73,13 +73,24 @@ export default class API {
 	}
 
 	async postReview(token, anime, score, text) {
-		return await fetch(`${this.baseUrl}/api/anime/review`, {
+		return await fetch(`${this.baseUrl}/api/anime/${anime}/review`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Auth-Token': token
 			},
-			body: JSON.stringify({ anime, score, text })
+			body: JSON.stringify({ score, text })
+		})
+	}
+
+	async updateReview(token, anime, score, text) {
+		return await fetch(`${this.baseUrl}/api/anime/${anime}/review`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Auth-Token': token
+			},
+			body: JSON.stringify({ score, text })
 		})
 	}
 
@@ -110,24 +121,29 @@ export default class API {
 	}
 
 	async addToList(anime, token) {
-		return await fetch(`${this.baseUrl}/api/profile/list/add`, {
+		return await fetch(`${this.baseUrl}/api/profile/list`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				'X-Auth-Token': token
 			},
-			body: JSON.stringify({
-				anime
-			})
+			body: JSON.stringify({ anime })
 		})
 	}
 
 	async removeFromList(anime, token) {
-		return await fetch(`${this.baseUrl}/api/profile/list/remove`)
+		return await fetch(`${this.baseUrl}/api/profile/list`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-Auth-Token': token
+			},
+			body: JSON.stringify({ anime })
+		})
 	}
 
 	async getProfileList(token) {
-		return await fetch(`${this.baseUrl}/api/profile/list/view`, {
+		return await fetch(`${this.baseUrl}/api/profile/list`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

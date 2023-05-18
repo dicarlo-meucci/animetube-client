@@ -6,12 +6,11 @@ import { useAPIStore } from '../../stores/api'
 import { useSessionStore } from '../../stores/session'
 import { ref, onMounted } from 'vue'
 
-
 const { API } = useAPIStore()
 const anime = useAnimeStore()
 const session = useSessionStore()
 
-const text = ref('')	
+const text = ref('')
 const rating = ref(0)
 
 function clearFields() {
@@ -25,6 +24,7 @@ async function getScore() {
 }
 
 async function postReview() {
+	// The rating is in base 5 and the database uses base 100, so we multiply by 20 to convert it
 	const result = await API.postReview(session.token, anime.id, rating.value * 20, text.value)
 
 	if (!result.ok) {
@@ -53,9 +53,20 @@ function getIconScale() {
 <template>
 	<div class="anime-panel-wrapper">
 		<h1 class="text-review">Recensioni</h1>
-		<star-rating v-model:rating="rating" class="rating" :star-size="iconScale" increment="0.5" active-color="#b844ff"/>
+		<star-rating
+			v-model:rating="rating"
+			class="rating"
+			:star-size="iconScale"
+			:increment="0.5"
+			active-color="#b844ff"
+		/>
 		<div class="review-controls">
-			<textarea v-model="text" class="description-wrapper" type="text" placeholder="Lascia una recensione..."></textarea>
+			<textarea
+				v-model="text"
+				class="description-wrapper"
+				type="text"
+				placeholder="Lascia una recensione..."
+			></textarea>
 		</div>
 		<button @click="postReview" type="submit" class="publish-button">Pubblica</button>
 	</div>
@@ -115,5 +126,4 @@ function getIconScale() {
 	background: var(--text-2);
 	color: var(--text);
 }
-
 </style>

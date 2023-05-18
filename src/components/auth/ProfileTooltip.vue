@@ -15,7 +15,7 @@ function handleProfile() {
 	<div class="profile-tooltip-wrapper">
 		<div @click="handleProfile" class="profile-tooltip">
 			<v-icon v-if="!session.pfp" class="pfp" name="fa-user" scale="1.2" />
-			<img v-if ="session.pfp" :src="session.pfp">
+			<img v-if="session.pfp" :src="session.pfp" />
 		</div>
 	</div>
 </template>

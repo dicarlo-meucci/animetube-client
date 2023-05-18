@@ -11,7 +11,7 @@ export const useAnimeStore = defineStore('anime', {
 		cover: null,
 		episodes: [],
 		tags: [],
-		reviews: [],
+		reviews: []
 	}),
 	actions: {
 		clearAnime() {

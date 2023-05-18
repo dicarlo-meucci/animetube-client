@@ -5,31 +5,42 @@ import { useSessionStore } from '../../stores/session'
 import { ref } from 'vue'
 
 const props = defineProps({
-	toggled: Boolean
+	isLiked: Boolean
 })
 
 const anime = useAnimeStore()
 const { API } = useAPIStore()
 const session = useSessionStore()
 
-const toggled = ref(props.toggled)
+const isLiked = ref(props.isLiked)
 
-async function addToList() {
-	const result = await API.addToList(anime.id, session.token)
+async function handleLike() {
+	if (isLiked.value) {
+		const result = await API.removeFromList(anime.id, session.token)
 
-	if (!result.ok) {
-		alert('fallito')
-		return
+		if (!result.ok) {
+			alert('fallito')
+			return
+		}
+
+		session.removeFromList({ id: anime.id })
+	} else {
+		const result = await API.addToList(anime.id, session.token)
+
+		if (!result.ok) {
+			alert('fallito')
+			return
+		}
+
+		session.addToList({ id: anime.id })
 	}
-
-	session.addToList(JSON.parse(JSON.stringify(anime)))
-	toggled.value = !toggled.value
+	isLiked.value = !isLiked.value
 }
 </script>
 
 <template>
 	<div class="like-button-wrapper" v-if="session.token">
-		<button @click="addToList" class="like-button" type="button">
+		<button @click="handleLike" :class="{ liked: isLiked }" class="like-button" type="button">
 			<v-icon name="fa-star" />
 		</button>
 	</div>
@@ -49,6 +60,11 @@ async function addToList() {
 	font-size: 1rem;
 	background: var(--text-2);
 	color: var(--text);
+}
+
+.like-button:hover {
+	transition: all 0.2s;
+	transform: scale(1.1) rotate(-5deg);
 }
 
 .liked {

@@ -25,7 +25,7 @@ const routes = [
 		component: () => import('../views/Profile.vue')
 	},
 	{
-		path: '/user/:pathMatch(.*)*',
+		path: '/users/:pathMatch(.*)*',
 		name: 'User',
 		component: () => import('../views/UserPage.vue')
 	},

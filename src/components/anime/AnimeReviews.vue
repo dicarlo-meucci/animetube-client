@@ -6,7 +6,6 @@ import { useAPIStore } from '../../stores/api'
 import { useSessionStore } from '../../stores/session'
 import { ref } from 'vue'
 
-
 const { API } = useAPIStore()
 const anime = useAnimeStore()
 const session = useSessionStore()
@@ -42,11 +41,10 @@ async function postReview() {
 		<h1 class="text-review">Recensioni</h1>
 		<star-rating class="rating" />
 		<div class="review-controls" v-for="review in session.reviews" :key="anime.id">
-			<p> {{ review.score }}</p>
-			<p> {{ review.date }}</p>
-			<p> {{ review.text }}</p>
-			<p> {{ review.author }}</p>
-		
+			<p>{{ review.score }}</p>
+			<p>{{ review.date }}</p>
+			<p>{{ review.text }}</p>
+			<p>{{ review.author }}</p>
 		</div>
 	</div>
 </template>
@@ -74,8 +72,6 @@ async function postReview() {
 	margin: 5px;
 	fill: var(--text-2);
 }
-
-
 
 .description-wrapper {
 	margin: 5px;
