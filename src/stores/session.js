@@ -43,9 +43,12 @@ export const useSessionStore = defineStore('session', {
 			)
 		},
 		loadSession() {
-			const { token, username, email, pfp, banner, list } = JSON.parse(localStorage.getItem('session'))
-			this.setSession({ token, username, email, pfp, banner, list })
-			this.saveSession()
+			if (localStorage.getItem('session'))
+			{
+				const { token, username, email, pfp, banner, list } = JSON.parse(localStorage.getItem('session'))
+				this.setSession({ token, username, email, pfp, banner, list })
+				this.saveSession()
+			}
 		},
 		setToken(token) {
 			this.token = token

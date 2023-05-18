@@ -29,7 +29,7 @@ async function addToList() {
 
 <template>
 	<div class="like-button-wrapper" v-if="session.token">
-		<button @click="addToList" class="like-button" type="button" :disabled="toggled">
+		<button @click="addToList" class="like-button" type="button">
 			<v-icon name="fa-star" />
 		</button>
 	</div>
@@ -51,7 +51,7 @@ async function addToList() {
 	color: var(--text);
 }
 
-.like-button:disabled {
+.liked {
 	background: #ff0056;
 	color: #ff0;
 }

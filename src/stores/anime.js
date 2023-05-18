@@ -10,7 +10,8 @@ export const useAnimeStore = defineStore('anime', {
 		score: null,
 		cover: null,
 		episodes: [],
-		tags: []
+		tags: [],
+		reviews: [],
 	}),
 	actions: {
 		clearAnime() {
@@ -23,6 +24,7 @@ export const useAnimeStore = defineStore('anime', {
 			this.cover = null
 			this.episodes = []
 			this.tags = []
+			this.reviews = []
 		},
 		setAnime(anime) {
 			this.id = anime.id
@@ -34,6 +36,7 @@ export const useAnimeStore = defineStore('anime', {
 			this.cover = anime.cover
 			this.episodes = anime.episodes ?? []
 			this.tags = anime.tags ?? []
+			this.reviews = anime.reviews ?? []
 		},
 		setId(id) {
 			this.id = id
@@ -61,6 +64,12 @@ export const useAnimeStore = defineStore('anime', {
 		},
 		setEpisodes(episodes) {
 			this.episodes = episodes
+		},
+		setReviews(reviews) {
+			this.reviews = reviews
+		},
+		addToReviews(review) {
+			this.reviews.push(review)
 		}
 	}
 })

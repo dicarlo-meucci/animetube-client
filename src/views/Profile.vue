@@ -77,9 +77,11 @@ fetchProfile()
 			<v-icon v-if="!session.pfp" name="fa-user" :scale="iconScale" />
 			<h2 class="username">@{{ session.username }}</h2>
 		</div>
-		<div class="profile-info">
+		<div class="logout-wrapper">
 			<button @click="logout" class="logout-button" type="button">Logout</button>
-			<!-- <UserList /> -->
+		</div>
+		<div class="profile-info">
+			<UserList />
 		</div>
 	</div>
 </template>
@@ -125,9 +127,8 @@ fetchProfile()
 	border: 0;
 	background: var(--text-2);
 	color: var(--text);
-	top: 0px;
-	right: 50px;
-	position: absolute;
+	float: right;
+	margin-right: 15px;
 	font-size: 1.4rem;
 	cursor: pointer;
 	font-weight: bolder;

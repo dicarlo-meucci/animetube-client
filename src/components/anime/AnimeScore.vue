@@ -11,7 +11,11 @@ const anime = useAnimeStore()
 
 async function getScore() {
 	const result = await API.getAnimeScore(anime.id)
-	if (result.ok) anime.setScore((await result.json()).score)
+	if (result.status != 200) {
+		return
+	}
+
+	anime.setScore((await result.json()).score)
 }
 
 onBeforeMount(async () => {
@@ -24,10 +28,10 @@ onBeforeMount(async () => {
 		<circle-progress
 			class="anime-rating"
 			:show-percent="true"
+			:percent="anime.score ?? 0"
 			empty-color=" #252525"
 			fill-color="#b844ff"
 			:size="150"
-			:percent="anime.score"
 		/>
 	</div>
 </template>

@@ -5,6 +5,7 @@ import AnimeInfo from '../anime/AnimeInfo.vue'
 import AnimeLikeButton from '../anime/AnimeLikeButton.vue'
 import { useSessionStore } from '../../stores/session'
 import { useAPIStore } from '../../stores/api'
+import router from '../../router'
 const { API } = useAPIStore()
 const session = useSessionStore()
 
@@ -13,12 +14,12 @@ async function sendToAnime(id) {
 }
 
 async function getList() {
-	const result = await store.API.getProfileList(store.session.token)
+	const result = await API.getProfileList(session.token)
 
 	if (!result.ok) return
 
 	const list = await result.json()
-	store.updateSession('list', list)
+	session.setList(list)
 }
 
 onMounted(async () => {
@@ -28,7 +29,8 @@ onMounted(async () => {
 
 <template>
 	<div class="user-list-wrapper">
-		<div class="anime-wrapper" v-for="anime in store.session.list" :key="anime.id">
+		<h1>Preferiti</h1>
+		<div class="anime-wrapper" @click="sendToAnime(anime.id)" v-for="anime in session.list" :key="anime.id">
 			<div class="key-visual-wrapper">
 				<img class="key-visual" :src="anime.cover" />
 			</div>
@@ -42,14 +44,27 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.anime-wrapper {
+.user-list-wrapper{
 	padding: 10px;
 	width: max-content;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	border-radius: 15px;
+	background: var(--bg-3);
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+}
+.anime-wrapper {
+	padding: 10px;
+	width: max;
+	display: flex;
+	flex-direction: row;
+	border-radius: 15px;
 	background: var(--bg-2);
+	margin-top: 10px;
+
 }
 .anime-info {
 	display: flex;
@@ -60,8 +75,8 @@ onMounted(async () => {
 	width: 100px;
 	object-fit: scale-down;
 	border-radius: 10px;
-	margin-right: auto;
-	margin-left: auto;
+
+	
 }
 
 .anime-info * {
@@ -69,14 +84,21 @@ onMounted(async () => {
 }
 @media screen and (max-width: 690px) {
 	h1 {
-		font-size: 2 0px;
+		font-size: 20px;
 	}
 	.key-visual {
 		width: 80px;
 		object-fit: scale-down;
 		border-radius: 10px;
-		margin-right: auto;
-		margin-left: auto;
+		
+		
 	}
+}
+@media screen and (max-width: 690px) {
+
+	.user-list-wrapper{
+
+	margin-top: 20%;
+}
 }
 </style>

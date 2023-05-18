@@ -1,9 +1,10 @@
 <script setup>
 import AnimePanel from '../components/anime/AnimePanel.vue'
-import AnimeReviews from '../components/anime/AnimeReviewsPanel.vue'
+import AnimeReviewPanel from '../components/anime/AnimeReviewPanel.vue'
 import AnimeEpisodes from '../components/anime/AnimeEpisodesPanel.vue'
 import AnimeDescription from '../components/anime/AnimeDescription.vue'
 import router from '../router'
+import AnimeReviews from '../components/anime/AnimeReviews.vue'
 import { useAnimeStore } from '../stores/anime'
 import { onMounted, ref, watch } from 'vue'
 const anime = useAnimeStore()
@@ -15,6 +16,7 @@ const anime = useAnimeStore()
 		<div class="anime-community-info">
 			<AnimeDescription />
 			<AnimeEpisodes />
+			<AnimeReviewPanel />
 			<AnimeReviews />
 		</div>
 	</div>
@@ -31,10 +33,10 @@ const anime = useAnimeStore()
 }
 
 .anime-community-info {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
+	margin-left: 20px;
 }
 
 @media screen and (max-width: 690px) {
@@ -42,11 +44,7 @@ const anime = useAnimeStore()
 		flex-direction: column;
 	}
 
-	.anime-community-info {
-		margin-left: 20px;
-	}
-
-	@media screen and (max-width: 310px) {
+@media screen and (max-width: 310px) {
 		.anime-page-wrapper {
 			font-size: 10px;
 		}

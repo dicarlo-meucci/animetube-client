@@ -4,6 +4,7 @@ import { useSessionStore } from '../../stores/session'
 import { useAPIStore } from '../../stores/api'
 const { API } = useAPIStore()
 const session = useSessionStore()
+
 function handleProfile() {
 	if (session.token) router.push('/profile')
 	else router.push('/login')
@@ -14,7 +15,7 @@ function handleProfile() {
 	<div class="profile-tooltip-wrapper">
 		<div @click="handleProfile" class="profile-tooltip">
 			<v-icon v-if="!session.pfp" class="pfp" name="fa-user" scale="1.2" />
-			<!-- add pfp here -->
+			<img v-if ="session.pfp" :src="session.pfp">
 		</div>
 	</div>
 </template>
@@ -28,9 +29,16 @@ function handleProfile() {
 	margin-right: 5px;
 	margin-left: 25px;
 	text-align: center;
+	cursor: pointer;
+}
+
+img {
+	border-radius: 50%;
+	width: 50px;
 }
 
 .pfp {
+	overflow: hidden;
 	margin-top: 25%;
 }
 

@@ -60,3 +60,7 @@ body {
 .splide__arrow svg {
 	fill: var(--text) !important;
 }
+
+.vue-star-rating-rating-text {
+	display: none;
+}
