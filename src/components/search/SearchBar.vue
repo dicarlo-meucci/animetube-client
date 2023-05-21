@@ -34,9 +34,9 @@ watch(searchTerm, (newValue, oldValue) => {
 	}
 })
 
-async function displayAnime(id) {
+async function sendToAnime(id) {
 	searchTerm.value = ''
-	router.push(`/anime/view/${id}`)
+	router.push(`/anime/${id}`)
 }
 </script>
 
@@ -49,7 +49,7 @@ async function displayAnime(id) {
 					v-for="(result, index) in searchResults"
 					:title="result.name"
 					:cover="result.cover"
-					@click="displayAnime(result.id)"
+					@click="sendToAnime(result.id)"
 				></SearchResult>
 			</div>
 		</div>

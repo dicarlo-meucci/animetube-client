@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@splidejs/vue-splide": "^0.6.12",
 		"gsap": "^3.11.5",
+		"mosha-vue-toastify": "^1.0.23",
 		"oh-vue-icons": "1.0.0-rc3",
 		"pinia": "^2.0.34",
 		"vue": "^3.2.47",

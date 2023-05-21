@@ -4,6 +4,8 @@ import { useSessionStore } from '../stores/session'
 import { useAPIStore } from '../stores/api'
 import UserList from '../components/user/UserList.vue'
 import { onMounted, ref } from 'vue'
+import { createToast } from 'mosha-vue-toastify'
+import 'mosha-vue-toastify/dist/style.css'
 
 const session = useSessionStore()
 const { API } = useAPIStore()
@@ -18,8 +20,22 @@ async function logout() {
 
 async function updateBanner() {
 	const result = await API.updateBanner(prompt('link'), session.token)
+
 	if (!result.ok) {
-		alert('fallito')
+		const error = await result.json()
+		createToast(
+			{
+				title: 'Errore',
+				description: error
+			},
+			{
+				showIcon: true,
+				toastBackgroundColor: '#ff0056',
+				position: 'top-center',
+				type: 'danger',
+				timeout: 2500
+			}
+		)
 		return
 	}
 
@@ -29,7 +45,20 @@ async function updateBanner() {
 async function updatePfp() {
 	const result = await API.updatePfp(prompt('link'), session.token)
 	if (!result.ok) {
-		alert('fallito')
+		const error = await result.json()
+		createToast(
+			{
+				title: 'Errore',
+				description: error
+			},
+			{
+				showIcon: true,
+				toastBackgroundColor: '#ff0056',
+				position: 'top-center',
+				type: 'danger',
+				timeout: 2500
+			}
+		)
 		return
 	}
 
@@ -48,12 +77,22 @@ function getIconScale() {
 	else iconScale.value = 6
 }
 
+async function getList() {
+	const result = await API.getProfileList(session.token)
+
+	if (!result.ok) return
+
+	const list = await result.json()
+	session.setList(list)
+}
+
 async function fetchProfile() {
 	const profile = await (await API.getProfile(session.token)).json()
 	session.setUsername(profile.username)
 	session.setEmail(profile.email)
 	session.setBanner(profile.banner)
 	session.setPfp(profile.pfp)
+	await getList()
 }
 
 fetchProfile()
@@ -81,7 +120,7 @@ fetchProfile()
 			<button @click="logout" class="logout-button" type="button">Logout</button>
 		</div>
 		<div class="profile-info">
-			<UserList />
+			<UserList :list="session.list" />
 		</div>
 	</div>
 </template>
@@ -106,9 +145,29 @@ fetchProfile()
 	margin-left: 50px;
 	text-align: center;
 	position: relative;
+	cursor: pointer;
+}
+
+.pfp-wrapper:active {
+	animation: wave 0.1s linear;
+}
+
+@keyframes wave {
+	0% {
+		transform: rotate(5deg);
+	}
+
+	50% {
+		transform: rotate(-5deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
 }
 
 .pfp {
+	cursor: pointer;
 	width: 120px;
 	height: 120px;
 	border-radius: 50%;
@@ -145,7 +204,11 @@ fetchProfile()
 .pen-icon:hover {
 	transition: all 0.1s;
 	color: var(--text-2);
-	transform: rotate(5deg);
+	cursor: pointer;
+}
+
+.pen-icon:active {
+	animation: wave 0.1s linear;
 }
 
 .pen-icon {

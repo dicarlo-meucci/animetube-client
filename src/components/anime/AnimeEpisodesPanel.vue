@@ -30,7 +30,7 @@ const anime = useAnimeStore()
 	border-radius: 10px;
 	border: none;
 	font-weight: bold;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	background: var(--text-2);
 }
 

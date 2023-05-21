@@ -1,5 +1,6 @@
 <script setup>
 import { useAnimeStore } from '../../stores/anime'
+import AnimeScore from './AnimeScore.vue'
 const anime = useAnimeStore()
 
 const studios = anime.studio.split(', ')
@@ -28,6 +29,8 @@ function getStudioLink(studio) {
 		<div class="tag-wrapper">
 			<div class="tag" v-for="tag in anime.tags">{{ tag }}</div>
 		</div>
+		<h2>Punteggio</h2>
+		<AnimeScore />
 	</div>
 </template>
 

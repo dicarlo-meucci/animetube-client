@@ -9,28 +9,19 @@ import router from '../../router'
 const { API } = useAPIStore()
 const session = useSessionStore()
 
-async function sendToAnime(id) {
-	router.push(`/anime/view/${id}`)
-}
-
-async function getList() {
-	const result = await API.getProfileList(session.token)
-
-	if (!result.ok) return
-
-	const list = await result.json()
-	session.setList(list)
-}
-
-onMounted(async () => {
-	await getList()
+const props = defineProps({
+	list: Array
 })
+
+async function sendToAnime(id) {
+	router.push(`/anime/${id}`)
+}
 </script>
 
 <template>
-	<div class="user-list-wrapper">
+	<div v-if="list.length" class="user-list-wrapper">
 		<h1>Preferiti</h1>
-		<div class="anime-wrapper" @click="sendToAnime(anime.id)" v-for="anime in session.list" :key="anime.id">
+		<div class="anime-wrapper" @click="sendToAnime(anime.id)" v-for="anime in props.list" :key="anime.id">
 			<div class="key-visual-wrapper">
 				<img class="key-visual" :src="anime.cover" />
 			</div>

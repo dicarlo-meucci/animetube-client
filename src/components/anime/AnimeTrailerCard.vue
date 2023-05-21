@@ -1,13 +1,16 @@
 <script setup>
 import { onMounted } from 'vue'
-
+const props = defineProps({
+	image: String,
+	link: String
+})
 onMounted(() => {
 	const cardWrappers = document.querySelectorAll('.trailer-card-wrapper')
 	const cards = document.querySelectorAll('.trailer-thumbnail')
 
 	// highest values for angle
 	const mostX = 10 // 10 or -10
-	const mostY = 10 // 10 or -10
+	const mostY = -10 // 10 or -10
 
 	for (let i = 0; i < cardWrappers.length; i++) {
 		cardWrappers[i].addEventListener('mousemove', (e) => {
@@ -40,12 +43,14 @@ onMounted(() => {
 <template>
 	<div class="trailer-card-wrapper">
 		<div class="trailer-info">
-			<button class="play-button">
-				<v-icon name="fa-play"></v-icon>
-			</button>
+			<a :href="props.link" target="_blank"
+				><button class="play-button">
+					<v-icon name="fa-play"></v-icon>
+				</button>
+			</a>
 		</div>
 		<div class="trailer-thumbnail">
-			<img src="https://staticg.sportskeeda.com/editor/2022/08/53e15-16596004347246.png" />
+			<img :src="props.image" />
 		</div>
 	</div>
 </template>

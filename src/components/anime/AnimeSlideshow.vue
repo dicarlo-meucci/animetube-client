@@ -1,23 +1,25 @@
 <script setup>
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
-import router from '../../router'
 
 const slides = [
 	{
-		image: 'https://www.akibagamers.it/wp-content/uploads/2022/12/blue-lock-anime-01-1620x800.jpg'
+		image: 'https://www.tomshw.it/images/images/2023/04/ecco-il-protagonista-del-nuovo-manga-di-naruto-e-di-cosa-parler-275617.jpg'
 	},
 	{
-		image: 'https://www.tomshw.it/images/images/2022/09/assassination-classroom-5-motivi-247684.jpg'
+		image: 'https://www.crunchyroll.com/imgsrv/display/thumbnail/1200x675/catalog/crunchyroll/4e954b4dff8729bf4476d76d8185bce6.jpe'
 	},
 	{
-		image: 'https://www.artribune.com/wp-content/uploads/2023/03/Naruto.jpg'
+		image: 'https://pic-bstarstatic.akamaized.net/ugc/26d7d76175410abc89fc28b577be31f694da7025.jpg'
 	},
 	{
-		image: 'https://multiplayer.net-cdn.it/thumbs/images/2022/12/25/nier-automata-pv_12-25-22_jpg_1600x900_crop_q85.jpg'
+		image: 'https://i0.wp.com/www.moviedigger.it/wp-content/uploads/2018/02/tokyo-ghoul-immagine-moviedigger.jpg'
 	},
 	{
-		image: 'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/01/10-darkest-anime-series-of-all-time.jpg'
+		image: 'https://i.etsystatic.com/23543199/r/il/ca0815/3360349950/il_570xN.3360349950_hcov.jpg'
+	},
+	{
+		image: 'https://i.ytimg.com/vi/MYxIx8ljI9U/maxresdefault.jpg'
 	}
 ]
 
@@ -59,13 +61,7 @@ const breakpoints = {
 	<div class="slideshow-container">
 		<div class="slideshow-wrapper">
 			<vueper-slides :arrows="true" :breakpoints="breakpoints" :duration="2000" autoplay>
-				<vueper-slide
-					class="slide-image"
-					@click="router.push('/anime')"
-					v-for="(slide, i) in slides"
-					:key="i"
-					:image="slide.image"
-				>
+				<vueper-slide class="slide-image" v-for="(slide, i) in slides" :key="i" :image="slide.image">
 				</vueper-slide>
 			</vueper-slides>
 		</div>

@@ -3,11 +3,7 @@ import AnimePanel from '../components/anime/AnimePanel.vue'
 import AnimeReviewPanel from '../components/anime/AnimeReviewPanel.vue'
 import AnimeEpisodes from '../components/anime/AnimeEpisodesPanel.vue'
 import AnimeDescription from '../components/anime/AnimeDescription.vue'
-import router from '../router'
 import AnimeReviews from '../components/anime/AnimeReviews.vue'
-import { useAnimeStore } from '../stores/anime'
-import { onMounted, ref, watch } from 'vue'
-const anime = useAnimeStore()
 </script>
 
 <template>
@@ -40,7 +36,7 @@ const anime = useAnimeStore()
 	margin-left: 20px;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 780px) {
 	.anime-community-info {
 		width: initial;
 	}

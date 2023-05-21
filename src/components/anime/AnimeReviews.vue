@@ -4,47 +4,71 @@ import StarRating from 'vue-star-rating'
 import { useAnimeStore } from '../../stores/anime'
 import { useAPIStore } from '../../stores/api'
 import { useSessionStore } from '../../stores/session'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const { API } = useAPIStore()
 const anime = useAnimeStore()
 const session = useSessionStore()
 
-const text = ref('')
-const rating = ref(0)
-
-function clearFields() {
-	text.value = ''
-	rating.value = 0
+function sendToUser(username) {
+	router.push(`/users/${username}`)
 }
 
-async function getScore() {
-	const result = await API.getAnimeScore(anime.id)
-	if (result.ok) anime.setScore((await result.json()).score)
-}
+async function fetchReviews() {
+	const result = await API.getReviews(anime.id)
 
-async function postReview() {
-	const result = await API.postReview(session.token, anime.id, rating.value, text.value)
-
-	if (!result.ok) {
-		alert((await result.json()).error)
+	if (result.status != 200) {
 		return
 	}
 
-	clearFields()
-	await getScore()
+	const reviews = await result.json()
+
+	anime.setReviews(reviews)
 }
+
+const iconScale = ref(6)
+
+function getIconScale() {
+	if (window.innerWidth < 410) iconScale.value = 25
+	else iconScale.value = 40
+}
+
+onMounted(async () => {
+	getIconScale()
+	window.addEventListener('resize', () => {
+		getIconScale()
+	})
+	await fetchReviews()
+})
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
 		<h1 class="text-review">Recensioni</h1>
-		<star-rating class="rating" />
-		<div class="review-controls" v-for="review in session.reviews" :key="anime.id">
-			<p>{{ review.score }}</p>
-			<p>{{ review.date }}</p>
-			<p>{{ review.text }}</p>
-			<p>{{ review.author }}</p>
+		<div class="review" v-for="review in anime.reviews" :key="anime.id">
+			<!-- User name -->
+			<div class="review-header">
+				<h1 @click="sendToUser(review.user)" class="user-format">{{ review.user }}</h1>
+				<p class="date-format">
+					Pubblicata il
+					{{ new Date(review.date).toLocaleDateString('it') }}
+					alle {{ new Date(review.date).toLocaleTimeString('it') }}
+				</p>
+			</div>
+			<!-- User score -->
+			<star-rating
+				:read-only="true"
+				:show-rating="false"
+				active-color="#b844ff"
+				:star-size="iconScale"
+				:increment="0.5"
+				:rating="review.score / 20"
+			></star-rating>
+			<!-- User review -->
+			<div class="review-text-wrapper">
+				<p>{{ review.text }}</p>
+			</div>
+			<!-- Publication date -->
 		</div>
 	</div>
 </template>
@@ -61,46 +85,42 @@ async function postReview() {
 	padding: 20px;
 }
 
-.review-controls {
-	width: 100%;
-	height: 150px;
-	display: flex;
-	flex-direction: row;
-}
-
-.rating {
-	margin: 5px;
-	fill: var(--text-2);
-}
-
-.description-wrapper {
-	margin: 5px;
-	font-size: 1rem;
-	width: auto;
-	height: 100px;
-	width: 100%;
-	padding: 10px;
-	border: 2px solid var(--text-2);
-	border-radius: 20px;
-	outline: none;
-	background: var(--bg-3);
-	color: #fff;
-}
-
 .text-review {
 	margin-left: 5px;
 	color: var(--text-2);
 }
 
-.publish-button {
-	width: 75px;
-	padding: 5px;
+.review {
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	margin: 5px;
+	background: var(--bg-3);
+	border-radius: 20px;
+	padding: 10px;
+}
+
+.review-text-wrapper {
+	background: var(--bg-2);
+	border-radius: 15px;
+	padding: 10px;
+	margin-top: 5px;
+}
+
+.review-header {
+	display: flex;
+	flex-direction: row;
+}
+
+.user-format {
+	cursor: pointer;
+	width: max-content;
+	color: var(--text-2);
+}
+
+.date-format {
 	margin-left: auto;
-	border-radius: 10px;
-	border: none;
-	font-weight: bold;
-	font-size: 1rem;
-	background: var(--text-2);
+	margin-top: 5px;
 	color: var(--text);
 }
 </style>

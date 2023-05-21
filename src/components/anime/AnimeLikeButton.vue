@@ -3,6 +3,8 @@ import { useAnimeStore } from '../../stores/anime'
 import { useAPIStore } from '../../stores/api'
 import { useSessionStore } from '../../stores/session'
 import { ref } from 'vue'
+import { createToast } from 'mosha-vue-toastify'
+import 'mosha-vue-toastify/dist/style.css'
 
 const props = defineProps({
 	isLiked: Boolean
@@ -19,7 +21,21 @@ async function handleLike() {
 		const result = await API.removeFromList(anime.id, session.token)
 
 		if (!result.ok) {
-			alert('fallito')
+			const error = await result.json()
+
+			createToast(
+				{
+					title: 'Errore',
+					description: error
+				},
+				{
+					showIcon: true,
+					toastBackgroundColor: '#ff0056',
+					position: 'top-center',
+					type: 'danger',
+					timeout: 2500
+				}
+			)
 			return
 		}
 
@@ -28,7 +44,20 @@ async function handleLike() {
 		const result = await API.addToList(anime.id, session.token)
 
 		if (!result.ok) {
-			alert('fallito')
+			const error = await result.json()
+			createToast(
+				{
+					title: 'Errore',
+					description: error
+				},
+				{
+					showIcon: true,
+					toastBackgroundColor: '#ff0056',
+					position: 'top-center',
+					type: 'danger',
+					timeout: 2500
+				}
+			)
 			return
 		}
 
@@ -60,11 +89,30 @@ async function handleLike() {
 	font-size: 1rem;
 	background: var(--text-2);
 	color: var(--text);
+	cursor: pointer;
 }
 
 .like-button:hover {
 	transition: all 0.2s;
-	transform: scale(1.1) rotate(-5deg);
+	transform: scale(1.1);
+}
+
+.like-button:active {
+	animation: wave 0.3s linear;
+}
+
+@keyframes wave {
+	0% {
+		transform: rotate(5deg);
+	}
+
+	50% {
+		transform: rotate(-5deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
 }
 
 .liked {

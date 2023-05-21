@@ -38,7 +38,6 @@ onBeforeMount(async () => {
 		<img class="key-visual" :src="anime.cover" />
 		<h1>Informazioni</h1>
 		<AnimeInfo />
-		<AnimeScore />
 	</div>
 </template>
 
@@ -67,7 +66,7 @@ onBeforeMount(async () => {
 	text-align: center;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 780px) {
 	.key-visual {
 		width: 250px;
 	}

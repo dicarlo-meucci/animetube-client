@@ -94,6 +94,18 @@ export default class API {
 		})
 	}
 
+	async getReviews(anime) {
+		return await fetch(`${this.baseUrl}/api/anime/${anime}/reviews`)
+	}
+
+	async getUserList(username) {
+		return await fetch(`${this.baseUrl}/api/users/${username}/list`)
+	}
+
+	async getTrailers() {
+		return await fetch(`${this.baseUrl}/api/anime/trailers`)
+	}
+
 	async updatePfp(link, token) {
 		return await fetch(`${this.baseUrl}/api/profile/picture`, {
 			method: 'PATCH',

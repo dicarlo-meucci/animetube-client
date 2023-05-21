@@ -12,6 +12,7 @@ const session = useSessionStore()
 
 const text = ref('')
 const rating = ref(0)
+const iconScale = ref(6)
 
 function clearFields() {
 	text.value = ''
@@ -21,6 +22,18 @@ function clearFields() {
 async function getScore() {
 	const result = await API.getAnimeScore(anime.id)
 	if (result.ok) anime.setScore((await result.json()).score)
+}
+
+async function fetchReviews() {
+	const result = await API.getReviews(anime.id)
+
+	if (result.status != 200) {
+		return
+	}
+
+	const reviews = await result.json()
+
+	anime.setReviews(reviews)
 }
 
 async function postReview() {
@@ -34,25 +47,25 @@ async function postReview() {
 
 	clearFields()
 	await getScore()
+	await fetchReviews()
 }
-
-const iconScale = ref(6)
-onMounted(() => {
-	getIconScale()
-	window.onresize = () => {
-		getIconScale()
-	}
-})
 
 function getIconScale() {
-	if (window.innerWidth < 400) iconScale.value = 25
-	else iconScale.value = 50
+	if (window.innerWidth < 410) iconScale.value = 25
+	else iconScale.value = 40
 }
+
+onMounted(() => {
+	getIconScale()
+	window.addEventListener('resize', () => {
+		getIconScale()
+	})
+})
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
-		<h1 class="text-review">Recensioni</h1>
+		<h1 class="text-review">Lascia una recensione</h1>
 		<star-rating
 			v-model:rating="rating"
 			class="rating"
@@ -98,7 +111,6 @@ function getIconScale() {
 .description-wrapper {
 	margin: 5px;
 	font-size: 1rem;
-	width: auto;
 	height: 100px;
 	width: 100%;
 	padding: 10px;
@@ -119,6 +131,7 @@ function getIconScale() {
 	width: 75px;
 	padding: 5px;
 	margin-left: auto;
+	margin-right: 5px;
 	border-radius: 10px;
 	border: none;
 	font-weight: bold;

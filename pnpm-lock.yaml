@@ -7,6 +7,9 @@ dependencies:
     gsap:
         specifier: ^3.11.5
         version: 3.11.5
+    mosha-vue-toastify:
+        specifier: ^1.0.23
+        version: 1.0.23
     oh-vue-icons:
         specifier: 1.0.0-rc3
         version: 1.0.0-rc3(vue@3.2.47)
@@ -19,6 +22,9 @@ dependencies:
     vue-router:
         specifier: '4'
         version: 4.1.6(vue@3.2.47)
+    vue-star-rating:
+        specifier: ^2.1.0
+        version: 2.1.0
     vue3-circle-progress:
         specifier: ^1.0.7
         version: 1.0.7(core-js@3.30.1)(vue@3.2.47)
@@ -579,6 +585,13 @@ packages:
         dependencies:
             sourcemap-codec: 1.4.8
 
+    /mosha-vue-toastify@1.0.23:
+        resolution:
+            {
+                integrity: sha512-K9fij3e3H+E/Lj82ISrgmyKrtM5RNmtZC/KG/KH47+oZGmzAkN/Zuz39kBdT/Mp8OxaHuIWQntEUMP+HdmK1xA==
+            }
+        dev: false
+
     /nanoid@3.3.6:
         resolution:
             {
@@ -787,6 +800,15 @@ packages:
             vue: ^3.2.0
         dependencies:
             '@vue/devtools-api': 6.5.0
+            vue: 3.2.47
+        dev: false
+
+    /vue-star-rating@2.1.0:
+        resolution:
+            {
+                integrity: sha512-LnhuQPi4hkRg7egKls+iqtL1U0RTN2gQkdLsJN7acyynMsSc9epHLzk8McJS+bR0OzfG98zNFq7mxAyuSb/okQ==
+            }
+        dependencies:
             vue: 3.2.47
         dev: false
 

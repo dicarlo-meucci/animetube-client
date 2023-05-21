@@ -4,6 +4,9 @@ import router from '../../router'
 import { ref } from 'vue'
 import { useSessionStore } from '../../stores/session'
 import { useAPIStore } from '../../stores/api'
+import { createToast } from 'mosha-vue-toastify'
+import 'mosha-vue-toastify/dist/style.css'
+
 const { API } = useAPIStore()
 const session = useSessionStore()
 
@@ -17,7 +20,22 @@ async function register() {
 		session.setSession(await result.json())
 		clearFields()
 		router.push('/profile')
-	} else alert((await result.json()).error)
+	} else {
+		const error = (await result.json()).error
+		createToast(
+			{
+				title: 'Errore',
+				description: error
+			},
+			{
+				showIcon: true,
+				toastBackgroundColor: '#ff0056',
+				position: 'top-center',
+				type: 'danger',
+				timeout: 2500
+			}
+		)
+	}
 }
 
 function clearFields() {
@@ -33,11 +51,11 @@ function clearFields() {
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
 			<label for="email">Email</label>
-			<input v-model="email" name="email" type="text" placeholder="balls@gmail.com" />
+			<input v-model="email" name="email" type="email" placeholder="balls@gmail.com" required />
 			<label for="username">Username</label>
-			<input v-model="username" name="username" type="text" placeholder="ballsniffer101" />
+			<input v-model="username" name="username" type="text" placeholder="ballsniffer101" required />
 			<label for="password">Password</label>
-			<input v-model="password" name="password" type="password" placeholder="******" />
+			<input v-model="password" name="password" type="password" placeholder="******" required />
 			<button class="register-button" type="submit">Registrati</button>
 			<p @click="router.push('/login')">Login</p>
 		</form>

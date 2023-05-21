@@ -2,6 +2,7 @@
 import Header from './components/Header.vue'
 import router from './router'
 import { useSessionStore } from './stores/session'
+
 const session = useSessionStore()
 session.loadSession()
 </script>

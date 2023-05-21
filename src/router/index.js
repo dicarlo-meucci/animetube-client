@@ -56,7 +56,7 @@ router.beforeEach(async (to, from) => {
 	}
 
 	if (to.name === 'Anime') {
-		const id = to.path.split('/')[3]
+		const id = to.path.split('/')[2]
 		if (id) {
 			const anime = await (await API.getAnime(id)).json()
 			animeStore.setAnime(anime)

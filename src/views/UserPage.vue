@@ -1,7 +1,7 @@
 <script setup>
 import router from '../router'
 import UserList from '../components/user/UserList.vue'
-import { onMounted, ref } from 'vue'
+import { onBeforeMount, onMounted, ref } from 'vue'
 import { useAPIStore } from '../stores/api'
 
 const { API } = useAPIStore()
@@ -9,6 +9,7 @@ const { API } = useAPIStore()
 const username = window.location.href.split('/')[window.location.href.split('/').length - 1]
 const iconScale = ref(6)
 const user = ref({})
+const list = ref([])
 
 onMounted(() => {
 	getIconScale()
@@ -22,6 +23,14 @@ function getIconScale() {
 	else iconScale.value = 6
 }
 
+async function getList() {
+	const result = await API.getUserList(username)
+
+	if (!result.ok) return
+
+	list.value = await result.json()
+}
+
 async function fetchProfile() {
 	const result = await API.getUserProfile(username)
 
@@ -31,8 +40,12 @@ async function fetchProfile() {
 	}
 
 	user.value = await result.json()
+	await getList()
 }
-fetchProfile()
+
+onMounted(async () => {
+	await fetchProfile()
+})
 </script>
 
 <template>
@@ -51,7 +64,9 @@ fetchProfile()
 			<v-icon v-if="!user.pfp" name="fa-user" :scale="iconScale" />
 			<h2 class="username">@{{ user.username }}</h2>
 		</div>
-		<div class="profile-info"></div>
+		<div class="profile-info">
+			<UserList v-if="list.length" :list="list" />
+		</div>
 	</div>
 </template>
 

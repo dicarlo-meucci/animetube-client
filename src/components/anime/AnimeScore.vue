@@ -40,11 +40,13 @@ onBeforeMount(async () => {
 .anime-score-wrapper {
 	width: 100%;
 	display: flex;
+	margin-top: 10px;
 }
 
 .anime-rating {
 	margin: auto;
 	text-align: center;
+	color: var(--text-2);
 }
 
 .anime-rating {
