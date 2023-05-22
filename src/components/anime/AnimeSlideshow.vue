@@ -4,19 +4,19 @@ import 'vueperslides/dist/vueperslides.css'
 
 const slides = [
 	{
-		image: 'https://www.tomshw.it/images/images/2023/04/ecco-il-protagonista-del-nuovo-manga-di-naruto-e-di-cosa-parler-275617.jpg'
+		image: 'https://i.redd.it/btujcq4vmcjy.jpg'
 	},
 	{
-		image: 'https://www.crunchyroll.com/imgsrv/display/thumbnail/1200x675/catalog/crunchyroll/4e954b4dff8729bf4476d76d8185bce6.jpe'
+		image: 'https://rare-gallery.com/uploads/posts/554211-food-wars-shokugeki.jpg'
 	},
 	{
-		image: 'https://pic-bstarstatic.akamaized.net/ugc/26d7d76175410abc89fc28b577be31f694da7025.jpg'
+		image: 'https://cdn.wallpapersafari.com/68/37/Jwpngb.jpg'
 	},
 	{
-		image: 'https://i0.wp.com/www.moviedigger.it/wp-content/uploads/2018/02/tokyo-ghoul-immagine-moviedigger.jpg'
+		image: 'https://wallpaperaccess.com/full/3322629.jpg'
 	},
 	{
-		image: 'https://i.etsystatic.com/23543199/r/il/ca0815/3360349950/il_570xN.3360349950_hcov.jpg'
+		image: 'https://i.pinimg.com/originals/5b/26/26/5b262629a153363a7f0e150a6ca9dffb.png'
 	},
 	{
 		image: 'https://i.ytimg.com/vi/MYxIx8ljI9U/maxresdefault.jpg'

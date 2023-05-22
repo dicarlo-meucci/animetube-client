@@ -1,6 +1,7 @@
 <script setup>
 import AnimeSlideshow from '../components/anime/AnimeSlideshow.vue'
 import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue'
+import Prompt from '../components/Prompt.vue'
 </script>
 
 <template>
@@ -10,6 +11,10 @@ import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue'
 		<div class="trailer">
 			<AnimeTrailerPanel />
 		</div>
+		
+	</div>
+	<div class="test">
+		<Prompt />
 	</div>
 </template>
 
@@ -33,5 +38,9 @@ import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue'
 	font-size: 35px;
 	margin-left: 5px;
 	margin-top: 5px;
+}
+
+.test{
+	height: 500px;
 }
 </style>

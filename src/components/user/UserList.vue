@@ -20,47 +20,72 @@ async function sendToAnime(id) {
 
 <template>
 	<div v-if="list.length" class="user-list-wrapper">
-		<h1>Preferiti</h1>
-		<div class="anime-wrapper" @click="sendToAnime(anime.id)" v-for="anime in props.list" :key="anime.id">
-			<div class="key-visual-wrapper">
-				<img class="key-visual" :src="anime.cover" />
+		<div class="anime-container">
+			<div class="favorite">
+				<h1>Preferiti</h1>
 			</div>
-			<div class="anime-info">
-				<h1>{{ anime.name }}</h1>
-				<p>by {{ anime.studio }}</p>
-				<p>Episodi: {{ anime.episodes }}</p>
+			<div class="anime-wrapper" @click="sendToAnime(anime.id)" v-for="anime in props.list" :key="anime.id">
+
+				<!-- Get key-visual -->
+				<div class="key-visual-wrapper">
+					<img class="key-visual" :src="anime.cover" />
+				</div>
+
+				<!-- Get anime info -->
+				<div class="anime-info">
+					<h1>{{ anime.name }}</h1>
+					<p>by {{ anime.studio }}</p>
+					<p>Episodi: {{ anime.episodes }}</p>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.user-list-wrapper {
+.favorite {
 	padding: 10px;
-	width: max-content;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	position: relative;
+}
+
+.anime-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+}
+
+.user-list-wrapper {
+	width: 90%;
+	padding: 10px;
+	display: flex;
+	flex-wrap: wrap;
 	border-radius: 15px;
 	background: var(--bg-3);
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10%;
 }
+
 .anime-wrapper {
 	padding: 10px;
-	width: max;
+	width: 100%;
 	display: flex;
 	flex-direction: row;
 	border-radius: 15px;
 	background: var(--bg-2);
 	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
 }
+
 .anime-info {
 	display: flex;
 	flex-direction: column;
 	padding-left: 10px;
 }
+
 .key-visual {
 	width: 100px;
 	object-fit: scale-down;
@@ -70,16 +95,29 @@ async function sendToAnime(id) {
 .anime-info * {
 	padding: 5px;
 }
+
+@media screen and (max-width: 1000px) {
+	.anime-wrapper {
+		width: 200px;
+	}
+}
+
 @media screen and (max-width: 690px) {
 	h1 {
 		font-size: 20px;
 	}
+
+	.anime-wrapper {
+		width: 60%;
+	}
+
 	.key-visual {
 		width: 80px;
 		object-fit: scale-down;
 		border-radius: 10px;
 	}
 }
+
 @media screen and (max-width: 690px) {
 	.user-list-wrapper {
 		margin-top: 20%;

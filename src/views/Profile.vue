@@ -122,6 +122,9 @@ fetchProfile()
 		<div class="profile-info">
 			<UserList :list="session.list" />
 		</div>
+		<div>
+			<UserReviews />
+		</div>
 	</div>
 </template>
 

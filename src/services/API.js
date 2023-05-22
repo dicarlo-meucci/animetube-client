@@ -1,6 +1,6 @@
 export default class API {
 	//baseUrl = `${window.location.protocol}//${window.location.host}`
-	baseUrl = 'http://localhost:3000'
+	baseUrl = 'http://10.22.9.11:3000'
 	constructor() {
 		let css = 'text-shadow: 1px 1px 2px black, 0 0 1em lime, 0 0 0.2em lime; font-size: 30px;'
 		console.log('%cAPI Initialized!', css)
@@ -162,6 +162,10 @@ export default class API {
 				'X-Auth-Token': token
 			}
 		})
+	}
+
+	async getUserReviews(username) {
+		return await fetch(`${this.baseUrl}/api/users/${username}/reviews`)
 	}
 }
 

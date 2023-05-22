@@ -10,6 +10,7 @@ const username = window.location.href.split('/')[window.location.href.split('/')
 const iconScale = ref(6)
 const user = ref({})
 const list = ref([])
+const reviews = ref([])
 
 onMounted(() => {
 	getIconScale()
@@ -29,6 +30,16 @@ async function getList() {
 	if (!result.ok) return
 
 	list.value = await result.json()
+}
+
+async function getReviews() {
+	const result = await API.getUserReviews(username)
+
+	if (result.status != 200) {
+		return
+	}
+
+	reviews.value = await result.json()
 }
 
 async function fetchProfile() {
