@@ -5,6 +5,8 @@ import { useAnimeStore } from '../../stores/anime'
 import { useAPIStore } from '../../stores/api'
 import { useSessionStore } from '../../stores/session'
 import { ref, onMounted } from 'vue'
+import { createToast } from 'mosha-vue-toastify'
+import 'mosha-vue-toastify/dist/style.css'
 
 const { API } = useAPIStore()
 const anime = useAnimeStore()
@@ -37,11 +39,43 @@ async function fetchReviews() {
 }
 
 async function postReview() {
+	if (!rating.value) {
+		createToast(
+			{
+				title: 'Errore',
+				description: 'Voto non espresso'
+			},
+			{
+				showIcon: true,
+				hideProgressBar: 'true',
+				toastBackgroundColor: '#ff0056',
+				position: 'top-center',
+				type: 'danger',
+				timeout: 2500
+			}
+		)
+		return
+	}
 	// The rating is in base 5 and the database uses base 100, so we multiply by 20 to convert it
 	const result = await API.postReview(session.token, anime.id, rating.value * 20, text.value)
 
 	if (!result.ok) {
-		alert((await result.json()).error)
+		const error = (await result.json()).error
+		createToast(
+			{
+				title: 'Errore',
+				description: error
+			},
+			{
+				showIcon: true,
+				hideProgressBar: 'true',
+				toastBackgroundColor: '#ff0056',
+				position: 'top-center',
+				type: 'danger',
+				timeout: 2500
+			}
+		)
+
 		return
 	}
 

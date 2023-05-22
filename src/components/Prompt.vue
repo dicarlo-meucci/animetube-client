@@ -1,75 +1,85 @@
 <script>
-import router from '../router'
+import { ref } from 'vue'
+const toggled = ref(false)
+const data = ref()
+
+function toggle() {
+    toggled.value = !toggled.value
+}
+
+function validate() {
+    // todo
+}
 </script>
 
 <template>
-    <div class="prompt-wrapper">
-        <div>
-            <p>Insert link</p>
-        
-            <input type="text">
-        </div>
-        <div>
-            <button class="button cancel">Cancel</button>
-            <button class="button set">Set</button>
-        </div>
-    </div>
+	<div v-if="toggled" class="prompt-wrapper">
+		<h1 class="title">Link</h1>
+		<textarea v-model="data" class="link"></textarea>
+		<div class="lower">
+			<button class="button cancel" @click="toggle">Cancella</button>
+			<button class="button set" @click="validate">OK</button>
+		</div>
+	</div>
 </template>
 
 <style scoped>
 .prompt-wrapper {
-    height: 300px;
-    width: 500px;
-    background-color: #454545;
-    text-align: center;
-    border: 2px solid #b844ff;
-
+	position: absolute;
+	right: 50%;
+	bottom: 50%;
+	transform: translate(50%, 50%);
+	height: 300px;
+	width: 500px;
+	background-color: var(--bg-4);
+	text-align: center;
+	border-radius: 15px;
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
-input[type=text]{
-  width: 80%;
-  padding: 4px 8px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.title {
+	color: var(--text-2);
+	margin-top: 15px;
+}
+
+textarea {
+	width: 80%;
+	height: 40%;
+	padding: 5px;
+	display: inline-block;
+	border-radius: 10px;
+	border: none;
+	box-sizing: border-box;
+	outline: none;
+	background: var(--bg-3);
+	color: #fff;
+	resize: none;
+	margin: auto;
 }
 
 .button {
-    background-color: #b844ff;
-    border: none;
-    color: #454545;
-    padding: 5px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 5px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 15%;
-    
+	width: 120px;
+	height: 35px;
+	border: none;
+	font-size: 1rem;
+	padding: 5px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 15px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 5px;
 }
 
 .cancel {
-    background-color: #454545;
-    color: black;
-    border: 2px solid red;
+	background-color: #ff0056;
 }
 
-.cancel:hover {
-    background-color: red;
-    color: white;
-}
 .set {
-    background-color: #454545;
-    color: black;
-    border: 2px solid #b844ff;
-}
-
-.set:hover {
-    background-color: #b844ff;
-    color: white;
+	background-color: #b844ff;
 }
 </style>

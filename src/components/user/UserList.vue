@@ -20,12 +20,11 @@ async function sendToAnime(id) {
 
 <template>
 	<div v-if="list.length" class="user-list-wrapper">
+		<div class="favorite">
+			<h1>Preferiti</h1>
+		</div>
 		<div class="anime-container">
-			<div class="favorite">
-				<h1>Preferiti</h1>
-			</div>
 			<div class="anime-wrapper" @click="sendToAnime(anime.id)" v-for="anime in props.list" :key="anime.id">
-
 				<!-- Get key-visual -->
 				<div class="key-visual-wrapper">
 					<img class="key-visual" :src="anime.cover" />
@@ -54,18 +53,20 @@ async function sendToAnime(id) {
 .anime-container {
 	display: flex;
 	flex-direction: column;
+	width: 98%;
+	margin: auto;
 }
 
 .user-list-wrapper {
-	width: 90%;
+	width: 100%;
 	padding: 10px;
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
 	border-radius: 15px;
 	background: var(--bg-3);
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 10%;
+	margin-top: 5%;
 }
 
 .anime-wrapper {
@@ -78,6 +79,8 @@ async function sendToAnime(id) {
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
+	cursor: pointer;
+	box-sizing: border-box;
 }
 
 .anime-info {
@@ -96,19 +99,9 @@ async function sendToAnime(id) {
 	padding: 5px;
 }
 
-@media screen and (max-width: 1000px) {
-	.anime-wrapper {
-		width: 200px;
-	}
-}
-
 @media screen and (max-width: 690px) {
 	h1 {
-		font-size: 20px;
-	}
-
-	.anime-wrapper {
-		width: 60%;
+		font-size: 1.5rem;
 	}
 
 	.key-visual {

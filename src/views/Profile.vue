@@ -3,6 +3,7 @@ import router from '../router'
 import { useSessionStore } from '../stores/session'
 import { useAPIStore } from '../stores/api'
 import UserList from '../components/user/UserList.vue'
+import UserReviews from '../components/user/UserReviews.vue'
 import { onMounted, ref } from 'vue'
 import { createToast } from 'mosha-vue-toastify'
 import 'mosha-vue-toastify/dist/style.css'
@@ -30,6 +31,7 @@ async function updateBanner() {
 			},
 			{
 				showIcon: true,
+				hideProgressBar: 'true',
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -53,6 +55,7 @@ async function updatePfp() {
 			},
 			{
 				showIcon: true,
+				hideProgressBar: 'true',
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -86,6 +89,18 @@ async function getList() {
 	session.setList(list)
 }
 
+async function getReviews() {
+	const result = await API.getProfileReviews(session.token)
+
+	if (result.status != 200) {
+		return
+	}
+
+	const reviews = await result.json()
+
+	session.setReviews(reviews)
+}
+
 async function fetchProfile() {
 	const profile = await (await API.getProfile(session.token)).json()
 	session.setUsername(profile.username)
@@ -93,9 +108,12 @@ async function fetchProfile() {
 	session.setBanner(profile.banner)
 	session.setPfp(profile.pfp)
 	await getList()
+	await getReviews()
 }
 
-fetchProfile()
+onMounted(async () => {
+	await fetchProfile()
+})
 </script>
 
 <template>
@@ -121,9 +139,7 @@ fetchProfile()
 		</div>
 		<div class="profile-info">
 			<UserList :list="session.list" />
-		</div>
-		<div>
-			<UserReviews />
+			<UserReviews v-if="session.reviews.length" :reviews="session.reviews" />
 		</div>
 	</div>
 </template>
@@ -135,7 +151,9 @@ fetchProfile()
 }
 
 .profile-info {
-	position: relative;
+	width: 90%;
+	margin: auto;
+	margin-bottom: 20px;
 }
 
 .pfp-wrapper {

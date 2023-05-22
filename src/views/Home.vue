@@ -11,11 +11,8 @@ import Prompt from '../components/Prompt.vue'
 		<div class="trailer">
 			<AnimeTrailerPanel />
 		</div>
-		
 	</div>
-	<div class="test">
-		<Prompt />
-	</div>
+	<Prompt />
 </template>
 
 <style scoped>
@@ -40,7 +37,7 @@ import Prompt from '../components/Prompt.vue'
 	margin-top: 5px;
 }
 
-.test{
+.test {
 	height: 500px;
 }
 </style>

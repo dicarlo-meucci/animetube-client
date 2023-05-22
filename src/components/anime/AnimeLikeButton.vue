@@ -30,6 +30,7 @@ async function handleLike() {
 				},
 				{
 					showIcon: true,
+					hideProgressBar: 'true',
 					toastBackgroundColor: '#ff0056',
 					position: 'top-center',
 					type: 'danger',
@@ -52,6 +53,7 @@ async function handleLike() {
 				},
 				{
 					showIcon: true,
+					hideProgressBar: 'true',
 					toastBackgroundColor: '#ff0056',
 					position: 'top-center',
 					type: 'danger',

@@ -29,6 +29,7 @@ async function register() {
 			},
 			{
 				showIcon: true,
+				hideProgressBar: 'true',
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',

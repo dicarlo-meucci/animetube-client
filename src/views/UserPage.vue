@@ -3,6 +3,7 @@ import router from '../router'
 import UserList from '../components/user/UserList.vue'
 import { onBeforeMount, onMounted, ref } from 'vue'
 import { useAPIStore } from '../stores/api'
+import UserReviews from '../components/user/UserReviews.vue'
 
 const { API } = useAPIStore()
 
@@ -51,7 +52,9 @@ async function fetchProfile() {
 	}
 
 	user.value = await result.json()
+
 	await getList()
+	await getReviews()
 }
 
 onMounted(async () => {
@@ -77,6 +80,7 @@ onMounted(async () => {
 		</div>
 		<div class="profile-info">
 			<UserList v-if="list.length" :list="list" />
+			<UserReviews v-if="reviews.length" :reviews="reviews" />
 		</div>
 	</div>
 </template>

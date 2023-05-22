@@ -7,7 +7,8 @@ export const useSessionStore = defineStore('session', {
 		email: null,
 		pfp: null,
 		banner: null,
-		list: []
+		list: [],
+		reviews: []
 	}),
 	actions: {
 		clearSession() {
@@ -17,6 +18,7 @@ export const useSessionStore = defineStore('session', {
 			this.pfp = null
 			this.banner = null
 			this.list = null
+			this.reviews = null
 			localStorage.removeItem('session')
 		},
 		setSession(session) {
@@ -26,6 +28,7 @@ export const useSessionStore = defineStore('session', {
 			this.pfp = session.pfp
 			this.banner = session.banner
 			this.list = session.list ?? []
+			this.reviews = session.reviews ?? []
 
 			this.saveSession()
 		},
@@ -38,14 +41,17 @@ export const useSessionStore = defineStore('session', {
 					email: this.email,
 					pfp: this.pfp,
 					banner: this.banner,
-					list: this.list
+					list: this.list,
+					reviews: this.reviews
 				})
 			)
 		},
 		loadSession() {
 			if (localStorage.getItem('session')) {
-				const { token, username, email, pfp, banner, list } = JSON.parse(localStorage.getItem('session'))
-				this.setSession({ token, username, email, pfp, banner, list })
+				const { token, username, email, pfp, banner, list, reviews } = JSON.parse(
+					localStorage.getItem('session')
+				)
+				this.setSession({ token, username, email, pfp, banner, list, reviews })
 				this.saveSession()
 			}
 		},
@@ -81,6 +87,10 @@ export const useSessionStore = defineStore('session', {
 		},
 		removeFromList(anime) {
 			this.list = this.list.filter((a) => a.id !== anime.id)
+			this.saveSession()
+		},
+		setReviews(reviews) {
+			this.reviews = reviews
 			this.saveSession()
 		}
 	}

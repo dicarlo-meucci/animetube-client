@@ -1,14 +1,7 @@
 <script setup>
 import router from '../../router'
 import StarRating from 'vue-star-rating'
-import { useAnimeStore } from '../../stores/anime'
-import { useAPIStore } from '../../stores/api'
-import { useSessionStore } from '../../stores/session'
 import { ref, onMounted } from 'vue'
-
-const { API } = useAPIStore()
-const anime = useAnimeStore()
-const session = useSessionStore()
 
 const props = defineProps({
 	reviews: Array
@@ -21,6 +14,10 @@ function getIconScale() {
 	else iconScale.value = 40
 }
 
+function sendToAnime(id) {
+	router.push(`/anime/${id}`)
+}
+
 onMounted(async () => {
 	getIconScale()
 	window.addEventListener('resize', () => {
@@ -30,19 +27,17 @@ onMounted(async () => {
 </script>
 
 <template>
-	<div class="anime-panel-wrapper">
-		<h1 class="text-review">Recensioni</h1>
-		<div class="review" v-for="review in anime.reviews" :key="user.id">
-			<!-- User name -->
+	<div class="reviews-wrapper">
+		<h1 class="reviews-header">Recensioni</h1>
+		<div class="review" v-for="review in props.reviews">
 			<div class="review-header">
-				<h1 @click="sendToUser(review.user)" class="user-format">{{ review.user }}</h1>
+				<h1 @click="sendToAnime(review.anime.id)" class="anime-name-format">{{ review.anime.name }}</h1>
 				<p class="date-format">
-					Pubblicata il
+					{{ new Date(review.date).toLocaleTimeString('it', { hour: 'numeric', minute: 'numeric' }) }}
+					-
 					{{ new Date(review.date).toLocaleDateString('it') }}
-					alle {{ new Date(review.date).toLocaleTimeString('it') }}
 				</p>
 			</div>
-			<!-- User score -->
 			<star-rating
 				:read-only="true"
 				:show-rating="false"
@@ -51,30 +46,28 @@ onMounted(async () => {
 				:increment="0.5"
 				:rating="review.score / 20"
 			></star-rating>
-			<!-- User review -->
 			<div class="review-text-wrapper">
 				<p>{{ review.text }}</p>
 			</div>
-			<!-- Publication date -->
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.anime-panel-wrapper {
-	background: var(--bg-4);
+.reviews-wrapper {
+	width: 100%;
+	background: var(--bg-3);
 	flex-direction: column;
 	display: flex;
 	margin-top: 20px;
 	margin-right: 20px;
 	border-radius: 20px;
 	color: var(--text);
-	padding: 20px;
+	padding: 10px;
 }
 
-.text-review {
-	margin-left: 5px;
-	color: var(--text-2);
+.reviews-header {
+	padding: 10px;
 }
 
 .review {
@@ -82,13 +75,13 @@ onMounted(async () => {
 	display: flex;
 	flex-direction: column;
 	margin: 5px;
-	background: var(--bg-3);
+	background: var(--bg-2);
 	border-radius: 20px;
 	padding: 10px;
 }
 
 .review-text-wrapper {
-	background: var(--bg-2);
+	background: var(--bg);
 	border-radius: 15px;
 	padding: 10px;
 	margin-top: 5px;
@@ -99,10 +92,9 @@ onMounted(async () => {
 	flex-direction: row;
 }
 
-.user-format {
+.anime-name-format {
 	cursor: pointer;
 	width: max-content;
-	color: var(--text-2);
 }
 
 .date-format {
