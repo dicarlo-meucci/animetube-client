@@ -50,9 +50,9 @@ onMounted(async () => {
 			<div class="review-header">
 				<h1 @click="sendToUser(review.user)" class="user-format">{{ review.user }}</h1>
 				<p class="date-format">
-					Pubblicata il
+					{{ new Date(review.date).toLocaleTimeString('it', { hour: 'numeric', minute: 'numeric' }) }}
+					-
 					{{ new Date(review.date).toLocaleDateString('it') }}
-					alle {{ new Date(review.date).toLocaleTimeString('it') }}
 				</p>
 			</div>
 			<star-rating
