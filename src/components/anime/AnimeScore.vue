@@ -3,7 +3,6 @@ import 'vue3-circle-progress/dist/circle-progress.css'
 import CircleProgress from 'vue3-circle-progress'
 import { useAnimeStore } from '../../stores/anime'
 import { useAPIStore } from '../../stores/api'
-import { useSessionStore } from '../../stores/session'
 import { onBeforeMount } from 'vue'
 
 const { API } = useAPIStore()

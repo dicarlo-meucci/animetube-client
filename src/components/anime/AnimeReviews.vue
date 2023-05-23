@@ -14,7 +14,7 @@ function sendToUser(username) {
 	router.push(`/users/${username}`)
 }
 
-async function fetchReviews() {
+async function getReviews() {
 	const result = await API.getReviews(anime.id)
 
 	if (result.status != 200) {
@@ -24,6 +24,7 @@ async function fetchReviews() {
 	const reviews = await result.json()
 
 	anime.setReviews(reviews)
+	anime.setOwnReview(reviews.find((r) => r.user == session.username))
 }
 
 const iconScale = ref(6)
@@ -38,15 +39,14 @@ onMounted(async () => {
 	window.addEventListener('resize', () => {
 		getIconScale()
 	})
-	await fetchReviews()
+	await getReviews()
 })
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
 		<h1 class="text-review">Recensioni</h1>
-		<div class="review" v-for="review in anime.reviews" :key="anime.id">
-			<!-- User name -->
+		<div class="review" v-for="review in anime.reviews.filter(r => r.user != session.username)" :key="anime.id">
 			<div class="review-header">
 				<h1 @click="sendToUser(review.user)" class="user-format">{{ review.user }}</h1>
 				<p class="date-format">
@@ -55,7 +55,6 @@ onMounted(async () => {
 					alle {{ new Date(review.date).toLocaleTimeString('it') }}
 				</p>
 			</div>
-			<!-- User score -->
 			<star-rating
 				:read-only="true"
 				:show-rating="false"
@@ -64,11 +63,9 @@ onMounted(async () => {
 				:increment="0.5"
 				:rating="review.score / 20"
 			></star-rating>
-			<!-- User review -->
 			<div class="review-text-wrapper">
 				<p>{{ review.text }}</p>
 			</div>
-			<!-- Publication date -->
 		</div>
 	</div>
 </template>

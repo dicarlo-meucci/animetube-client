@@ -1,5 +1,4 @@
 <script setup>
-import AnimeScore from './AnimeScore.vue'
 import AnimeInfo from './AnimeInfo.vue'
 import AnimeLikeButton from './AnimeLikeButton.vue'
 import { useAnimeStore } from '../../stores/anime'
@@ -14,13 +13,15 @@ const isLiked = ref(false)
 async function getList() {
 	const result = await API.getProfileList(session.token)
 
-	if (!result.ok) return
+	if (result.status != 200) return
 
 	const list = await result.json()
 	session.setList(list)
 }
 
 async function checkLiked() {
+	if (!session.token) return
+
 	if (!session.list.length) await getList()
 
 	isLiked.value = !!session.list.find((a) => a.id == anime.id)

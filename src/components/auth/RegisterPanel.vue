@@ -29,7 +29,7 @@ async function register() {
 			},
 			{
 				showIcon: true,
-				hideProgressBar: 'true',
+				hideProgressBar: true,
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -52,9 +52,9 @@ function clearFields() {
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
 			<label for="email">Email</label>
-			<input v-model="email" name="email" type="email" placeholder="balls@gmail.com" required />
+			<input v-model="email" name="email" type="email" placeholder="dev@animetube.com" required />
 			<label for="username">Username</label>
-			<input v-model="username" name="username" type="text" placeholder="ballsniffer101" required />
+			<input v-model="username" name="username" type="text" placeholder="AnimeEnjoyer101" required />
 			<label for="password">Password</label>
 			<input v-model="password" name="password" type="password" placeholder="******" required />
 			<button class="register-button" type="submit">Registrati</button>

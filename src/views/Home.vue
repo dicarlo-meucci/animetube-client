@@ -1,7 +1,6 @@
 <script setup>
 import AnimeSlideshow from '../components/anime/AnimeSlideshow.vue'
 import AnimeTrailerPanel from '../components/anime/AnimeTrailerPanel.vue'
-import Prompt from '../components/Prompt.vue'
 </script>
 
 <template>
@@ -12,7 +11,6 @@ import Prompt from '../components/Prompt.vue'
 			<AnimeTrailerPanel />
 		</div>
 	</div>
-	<Prompt />
 </template>
 
 <style scoped>
@@ -29,15 +27,5 @@ import Prompt from '../components/Prompt.vue'
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-}
-
-.text-trailer {
-	font-size: 35px;
-	margin-left: 5px;
-	margin-top: 5px;
-}
-
-.test {
-	height: 500px;
 }
 </style>

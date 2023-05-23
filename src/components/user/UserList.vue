@@ -1,13 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import AnimeScore from '../anime/AnimeScore.vue'
-import AnimeInfo from '../anime/AnimeInfo.vue'
-import AnimeLikeButton from '../anime/AnimeLikeButton.vue'
-import { useSessionStore } from '../../stores/session'
-import { useAPIStore } from '../../stores/api'
 import router from '../../router'
-const { API } = useAPIStore()
-const session = useSessionStore()
 
 const props = defineProps({
 	list: Array
@@ -25,12 +17,10 @@ async function sendToAnime(id) {
 		</div>
 		<div class="anime-container">
 			<div class="anime-wrapper" @click="sendToAnime(anime.id)" v-for="anime in props.list" :key="anime.id">
-				<!-- Get key-visual -->
 				<div class="key-visual-wrapper">
 					<img class="key-visual" :src="anime.cover" />
 				</div>
 
-				<!-- Get anime info -->
 				<div class="anime-info">
 					<h1>{{ anime.name }}</h1>
 					<p>by {{ anime.studio }}</p>
@@ -64,8 +54,6 @@ async function sendToAnime(id) {
 	flex-direction: column;
 	border-radius: 15px;
 	background: var(--bg-3);
-	margin-left: auto;
-	margin-right: auto;
 	margin-top: 5%;
 }
 

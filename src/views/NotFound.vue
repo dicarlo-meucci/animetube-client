@@ -1,6 +1,4 @@
-<script setup>
-// add BATTISTINI easter egg
-</script>
+<script setup></script>
 
 <template>
 	<div class="notfound-wrapper">

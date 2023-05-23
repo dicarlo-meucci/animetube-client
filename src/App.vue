@@ -1,17 +1,15 @@
 <script setup>
 import Header from './components/Header.vue'
-import router from './router'
 import { useSessionStore } from './stores/session'
-
-const session = useSessionStore()
-session.loadSession()
+const { loadSession } = useSessionStore()
+loadSession()
 </script>
 
 <template>
 	<Header></Header>
 	<transition name="slide">
 		<router-view v-slot="{ Component, route }">
-			<component :key="router.currentRoute.value" :is="Component" />
+			<component :key="route" :is="Component" />
 		</router-view>
 	</transition>
 </template>

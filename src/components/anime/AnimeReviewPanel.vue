@@ -1,10 +1,9 @@
 <script setup>
-import router from '../../router'
 import StarRating from 'vue-star-rating'
 import { useAnimeStore } from '../../stores/anime'
 import { useAPIStore } from '../../stores/api'
 import { useSessionStore } from '../../stores/session'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { createToast } from 'mosha-vue-toastify'
 import 'mosha-vue-toastify/dist/style.css'
 
@@ -26,7 +25,7 @@ async function getScore() {
 	if (result.ok) anime.setScore((await result.json()).score)
 }
 
-async function fetchReviews() {
+async function getReviews() {
 	const result = await API.getReviews(anime.id)
 
 	if (result.status != 200) {
@@ -47,7 +46,7 @@ async function postReview() {
 			},
 			{
 				showIcon: true,
-				hideProgressBar: 'true',
+				hideProgressBar: true,
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -68,7 +67,7 @@ async function postReview() {
 			},
 			{
 				showIcon: true,
-				hideProgressBar: 'true',
+				hideProgressBar: true,
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -81,8 +80,17 @@ async function postReview() {
 
 	clearFields()
 	await getScore()
-	await fetchReviews()
+	await getReviews()
 }
+
+function checkOwnReview() {
+	if (anime.ownReview) {
+		text.value = anime.ownReview.text
+		rating.value = anime.ownReview.score / 20
+	}
+}
+
+watch(anime, () => checkOwnReview())
 
 function getIconScale() {
 	if (window.innerWidth < 410) iconScale.value = 25
@@ -94,17 +102,19 @@ onMounted(() => {
 	window.addEventListener('resize', () => {
 		getIconScale()
 	})
+	checkOwnReview()
 })
 </script>
 
 <template>
 	<div class="anime-panel-wrapper">
-		<h1 class="text-review">Lascia una recensione</h1>
+		<h1 class="text-review">{{ anime.ownReview ? 'La tua recensione' : 'Lascia una recensione' }}</h1>
 		<star-rating
 			v-model:rating="rating"
 			class="rating"
 			:star-size="iconScale"
 			:increment="0.5"
+			:read-only="!!anime.ownReview"
 			active-color="#b844ff"
 		/>
 		<div class="review-controls">
@@ -113,9 +123,10 @@ onMounted(() => {
 				class="description-wrapper"
 				type="text"
 				placeholder="Lascia una recensione..."
+				:readonly="anime.ownReview"
 			></textarea>
 		</div>
-		<button @click="postReview" type="submit" class="publish-button">Pubblica</button>
+		<button @click="postReview" type="submit" class="publish-button" v-if="!anime.ownReview">Pubblica</button>
 	</div>
 </template>
 

@@ -64,10 +64,6 @@ router.beforeEach(async (to, from) => {
 	}
 
 	if (to.name === 'User') {
-		if (!session.username) {
-			await fetchProfile()
-		}
-
 		if (to.fullPath.split('/')[to.fullPath.split('/').length - 1] == session.username) {
 			router.push('/profile')
 		}
@@ -77,15 +73,5 @@ router.beforeEach(async (to, from) => {
 		if (!session.token) router.push('/Login')
 	}
 })
-
-async function fetchProfile() {
-	const { API } = useAPIStore()
-	const session = useSessionStore()
-	const profile = await (await API.getProfile(session.token)).json()
-	session.setUsername(profile.username)
-	session.setEmail(profile.email)
-	session.setBanner(profile.banner)
-	session.setPfp(profile.pfp)
-}
 
 export default router

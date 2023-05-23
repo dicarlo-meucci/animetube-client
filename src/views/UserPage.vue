@@ -1,7 +1,7 @@
 <script setup>
 import router from '../router'
 import UserList from '../components/user/UserList.vue'
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAPIStore } from '../stores/api'
 import UserReviews from '../components/user/UserReviews.vue'
 
@@ -22,13 +22,13 @@ onMounted(() => {
 
 function getIconScale() {
 	if (window.innerWidth < 690) iconScale.value = 4
-	else iconScale.value = 6
+	else iconScale.value = 5.8
 }
 
 async function getList() {
 	const result = await API.getUserList(username)
 
-	if (!result.ok) return
+	if (result.status != 200) return
 
 	list.value = await result.json()
 }
@@ -36,9 +36,7 @@ async function getList() {
 async function getReviews() {
 	const result = await API.getUserReviews(username)
 
-	if (result.status != 200) {
-		return
-	}
+	if (result.status != 200) return
 
 	reviews.value = await result.json()
 }
@@ -92,7 +90,9 @@ onMounted(async () => {
 }
 
 .profile-info {
-	position: relative;
+	width: 90%;
+	margin: auto;
+	margin-bottom: 20px;
 }
 
 .pfp-wrapper {
@@ -105,6 +105,7 @@ onMounted(async () => {
 	margin-left: 50px;
 	text-align: center;
 	position: relative;
+	margin-bottom: 60px;
 }
 
 .pfp {

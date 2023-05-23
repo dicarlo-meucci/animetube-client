@@ -28,7 +28,7 @@ async function login() {
 			},
 			{
 				showIcon: true,
-				hideProgressBar: 'true',
+				hideProgressBar: true,
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -50,9 +50,9 @@ function clearFields() {
 			<img :src="logo" />
 			<h1>Benvenuto su AnimeTube</h1>
 			<label for="email">Email / Username</label>
-			<input v-model="username" name="email" type="text" placeholder="email@gmail.com" required />
+			<input v-model="username" name="email" type="text" placeholder="dev@animetube.com" required />
 			<label for="password">Password</label>
-			<input v-model="password" name="password" type="password" placeholder="password" required />
+			<input v-model="password" name="password" type="password" placeholder="******" required />
 			<button class="login-button" type="submit">Entra</button>
 			<p @click="router.push('/register')">Registrazione</p>
 		</form>

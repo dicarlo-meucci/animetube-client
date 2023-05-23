@@ -4,6 +4,8 @@ import AnimeReviewPanel from '../components/anime/AnimeReviewPanel.vue'
 import AnimeEpisodes from '../components/anime/AnimeEpisodesPanel.vue'
 import AnimeDescription from '../components/anime/AnimeDescription.vue'
 import AnimeReviews from '../components/anime/AnimeReviews.vue'
+import { useSessionStore } from '../stores/session'
+const session = useSessionStore()
 </script>
 
 <template>
@@ -12,7 +14,7 @@ import AnimeReviews from '../components/anime/AnimeReviews.vue'
 		<div class="anime-community-info">
 			<AnimeDescription />
 			<AnimeEpisodes />
-			<AnimeReviewPanel />
+			<AnimeReviewPanel v-if="session.token" />
 			<AnimeReviews />
 		</div>
 	</div>

@@ -14,13 +14,13 @@ const { API } = useAPIStore()
 const iconScale = ref(6)
 
 async function logout() {
+	router.push('/')
 	await API.logout(session.token)
 	session.clearSession()
-	router.push('/')
 }
 
 async function updateBanner() {
-	const result = await API.updateBanner(prompt('link'), session.token)
+	const result = await API.updateBanner(prompt('Inserisci il link'), session.token)
 
 	if (!result.ok) {
 		const error = await result.json()
@@ -31,7 +31,7 @@ async function updateBanner() {
 			},
 			{
 				showIcon: true,
-				hideProgressBar: 'true',
+				hideProgressBar: true,
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -45,7 +45,7 @@ async function updateBanner() {
 }
 
 async function updatePfp() {
-	const result = await API.updatePfp(prompt('link'), session.token)
+	const result = await API.updatePfp(prompt('Inserisci il link'), session.token)
 	if (!result.ok) {
 		const error = await result.json()
 		createToast(
@@ -55,7 +55,7 @@ async function updatePfp() {
 			},
 			{
 				showIcon: true,
-				hideProgressBar: 'true',
+				hideProgressBar: true,
 				toastBackgroundColor: '#ff0056',
 				position: 'top-center',
 				type: 'danger',
@@ -77,13 +77,13 @@ onMounted(() => {
 
 function getIconScale() {
 	if (window.innerWidth < 690) iconScale.value = 4
-	else iconScale.value = 6
+	else iconScale.value = 5.8
 }
 
 async function getList() {
 	const result = await API.getProfileList(session.token)
 
-	if (!result.ok) return
+	if (result.status != 200) return
 
 	const list = await result.json()
 	session.setList(list)
@@ -92,9 +92,7 @@ async function getList() {
 async function getReviews() {
 	const result = await API.getProfileReviews(session.token)
 
-	if (result.status != 200) {
-		return
-	}
+	if (result.status != 200) return
 
 	const reviews = await result.json()
 
@@ -169,6 +167,12 @@ onMounted(async () => {
 	cursor: pointer;
 }
 
+.pfp-wrapper:hover {
+	transition: all 0.1s;
+	color: var(--text-2);
+	cursor: pointer;
+}
+
 .pfp-wrapper:active {
 	animation: wave 0.1s linear;
 }
@@ -212,6 +216,7 @@ onMounted(async () => {
 	font-size: 1.4rem;
 	cursor: pointer;
 	font-weight: bolder;
+	margin-bottom: 50px;
 }
 
 .profile-banner {
